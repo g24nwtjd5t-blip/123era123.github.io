@@ -1,785 +1,2286 @@
-<!OCTYPE html>
-<html lang="ru" class="scroll-smooth">
+<!doctype html>
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Калькулятор пени за задержку зарплаты в РК | Еңбекақы Инфо</title>
-  
-  <!-- Google Fonts: Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-          },
-          colors: {
-            brand: {
-              50: '#f0f9ff',
-              100: '#e0f2fe',
-              200: '#bae6fd',
-              500: '#0ea5e9',
-              600: '#0284c7', // Brand Blue (#0284c7)
-              700: '#0369a1',
-              900: '#0c4a6e',
-            }
-          }
-        }
-      }
-    }
-  </script>
-
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; form-action 'none'; base-uri 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>Калькулятор пени за задержку заработной платы в Республике Казахстан</title>
   <style>
-    body { font-family: 'Inter', sans-serif; }
+:root {
+  color-scheme: light;
+  --bg: #f5f6f8;
+  --surface: #fff;
+  --soft: #eef3f8;
+  --ink: #142338;
+  --muted: #46566a;
+  --line: #d5dee7;
+  --link: #164e79;
+  --primary: #173958;
+  --on-primary: #fff;
+  --focus: #316c98;
+  --danger: #a02032;
+  --danger-bg: #fff3f4;
+  --shadow: 0 18px 42px #172b4310;
+  font-family: Inter, 'Segoe UI', Arial, sans-serif;
+  font-size: 100%;
+  line-height: 1.55;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { min-width: 280px; }
+body { margin: 0; background: var(--bg); color: var(--ink); min-height: 100vh; display: flex; flex-direction: column; }
+a { color: var(--link); text-underline-offset: .2em; }
+button, input, textarea { font: inherit; color: inherit; }
+button, summary, input[type='checkbox'] { cursor: pointer; }
+button:disabled, input:disabled { cursor: default; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+h1, h2, h3 { line-height: 1.16; letter-spacing: -.026em; margin: 0; }
+h1 { font-size: clamp(2.15rem, 5vw, 3.7rem); }
+h2 { font-size: clamp(1.35rem, 3vw, 2rem); }
+h3 { font-size: 1.1rem; }
+p { margin: .65rem 0 0; }
+.wrap { width: min(1120px, calc(100% - 3rem)); margin-inline: auto; }
+.skip { position: absolute; top: .5rem; left: .5rem; z-index: 10; transform: translateY(-150%); background: var(--surface); padding: .65rem 1rem; }
+.skip:focus { transform: translateY(0); }
+.site-header { background: var(--surface); border-bottom: 1px solid var(--line); }
+.masthead { display: flex; justify-content: space-between; align-items: center; gap: 1.2rem; min-height: 76px; padding-block: .65rem; }
+.brand { display: inline-flex; align-items: center; gap: .65rem; color: var(--ink); text-decoration: none; font-weight: 750; white-space: nowrap; }
+.brand-mark { width: 37px; height: 37px; display: grid; place-items: center; color: var(--on-primary); background: var(--primary); border-radius: 9px; font-size: 1.18rem; }
+.site-nav { display: flex; flex-wrap: wrap; gap: .25rem; align-items: center; }
+.site-nav a { color: var(--muted); padding: .58rem .75rem; border-radius: 8px; text-decoration: none; font-size: .9rem; font-weight: 600; }
+.site-nav a:hover, .site-nav a[aria-current='page'] { color: var(--ink); background: var(--soft); }
+main { flex: 1; padding-block: clamp(2.25rem, 6vw, 5rem); }
+.site-footer { padding-block: 1.25rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .86rem; }
+.footer-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .45rem 1.2rem; }
+.muted, .lead, .hint { color: var(--muted); }
+.lead { font-size: clamp(1rem, 2vw, 1.13rem); max-width: 65ch; margin-top: 1rem; }
+.hint { font-size: .87rem; }
+.hint a { overflow-wrap: anywhere; }
+.page-head, .content-section { margin-bottom: 2rem; }
+.content-section:last-child { margin-bottom: 0; }
+.content-section > h2 { margin-bottom: 1rem; }
+.hero { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); align-items: center; gap: clamp(1.6rem, 6vw, 5.75rem); padding-block: .6rem 1rem; }
+.hero > *, .form-layout > *, .guide-layout > * { min-width: 0; }
+.actions { display: flex; flex-wrap: wrap; gap: .7rem; align-items: center; margin-top: 1.5rem; }
+.button { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; min-height: 44px; padding: .65rem 1rem; border: 1px solid var(--primary); border-radius: 8px; background: var(--primary); color: var(--on-primary); text-decoration: none; font-weight: 650; line-height: 1.25; text-align: center; }
+.button:hover { filter: brightness(1.12); }
+.button.secondary { border-color: var(--line); color: var(--ink); background: var(--surface); }
+.button.secondary:hover { border-color: var(--focus); background: var(--soft); filter: none; }
+.button:disabled { opacity: .58; }
+.card, .hero-aside, .note { background: var(--surface); border: 1px solid var(--line); border-radius: 13px; padding: clamp(1rem, 3vw, 1.55rem); }
+.card p, .note p { max-width: 68ch; }
+.hero-aside { background: var(--primary); color: var(--on-primary); padding: clamp(1.3rem, 4vw, 2rem); }
+.hero-aside ul { list-style: none; padding: 0; margin: .85rem 0 0; }
+.hero-aside li { display: flex; align-items: center; gap: .8rem; padding: .65rem 0; border-top: 1px solid #ffffff38; }
+.hero-aside p { color: inherit; }
+.note { background: var(--soft); border-inline-start: 4px solid var(--focus); }
+.note p:first-child, .card p:first-child { margin-top: 0; }
+.note h2 { font-size: 1.22rem; }
+.grid-three, .law-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, minmax(0,1fr)); }
+.law-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.info-stack { display: grid; gap: 1rem; }
+.steps-home { list-style: none; padding: 0; margin: 0; }
+.step-label { display: block; margin-bottom: .7rem; color: var(--link); font-weight: 750; }
+.interactive .button, .interactive .site-nav a, .interactive .steps-home .card { transition: background .2s, color .2s, border-color .2s, box-shadow .2s, transform .2s; }
+@media (hover: hover) { .interactive .steps-home .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); } }
+.form-layout, .guide-layout { display: grid; gap: 1.25rem; align-items: start; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.guide-layout { grid-template-columns: minmax(0, 1.7fr) minmax(0, .9fr); }
+.form-layout h2, .guide-layout h2 { margin-bottom: .35rem; }
+.field { margin-top: 1.05rem; }
+.field > label, .label { display: block; font-weight: 650; margin-bottom: .35rem; }
+input:not([type='checkbox']), textarea { width: 100%; min-width: 0; min-height: 46px; border: 1px solid var(--line); border-radius: 8px; padding: .62rem .75rem; background: var(--surface); }
+input:not([type='checkbox']):hover, textarea:hover { border-color: var(--focus); }
+input[aria-invalid='true'] { border-color: var(--danger); }
+input::placeholder { color: var(--muted); opacity: 1; }
+input[type='checkbox'] { accent-color: var(--primary); width: 1.13rem; height: 1.13rem; flex: none; margin: .15rem 0 0; }
+.check { display: flex; gap: .65rem; align-items: flex-start; }
+.check span { min-width: 0; }
+.status-field { margin-top: .8rem; }
+.field-error { margin: .35rem 0 0; color: var(--danger); font-size: .88rem; }
+.error-summary { color: var(--danger); background: var(--danger-bg); border-radius: 8px; padding: .7rem .85rem; margin-top: 1rem; }
+.results { padding: 0; overflow: hidden; }
+.result-body { padding: clamp(1rem, 3vw, 1.55rem); }
+.result-top { padding: clamp(1rem, 3vw, 1.55rem); background: var(--soft); border-bottom: 1px solid var(--line); }
+.result-amount { font-size: clamp(1.75rem, 4vw, 2.65rem); font-weight: 750; margin: .15rem 0 0; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.result-rows { margin: 0 0 1rem; }
+.result-rows div { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: .6rem; padding: .63rem 0; border-bottom: 1px solid var(--line); }
+.result-rows dd { margin: 0; text-align: right; font-weight: 700; overflow-wrap: anywhere; }
+.formula { padding: .65rem .8rem; background: var(--soft); border-radius: 6px; overflow-wrap: anywhere; }
+.numbered { padding-left: 1.4rem; margin: 1rem 0 0; }
+.numbered li { padding-inline-start: .2rem; margin-bottom: .7rem; }
+.numbered li p { margin-top: .15rem; }
+.source-link { display: inline-block; max-width: 100%; overflow-wrap: anywhere; font-weight: 650; }
+.sources { padding-left: 1.15rem; margin-block: .6rem 0; }
+.sources li + li { margin-top: .55rem; }
+.law-card { display: flex; flex-direction: column; gap: .75rem; align-items: flex-start; }
+.law-card p { margin-top: 0; }
+.law-card .citation-line { margin-top: auto; }
+.citation-line small { display: block; color: var(--muted); }
+.guide-step, .faq details { background: var(--surface); border: 1px solid var(--line); border-radius: 11px; }
+.guide-step + .guide-step, .faq details + details { margin-top: .65rem; }
+.guide-step summary, .faq summary { padding: .9rem 1rem; font-weight: 650; }
+.guide-step[open] summary, .faq details[open] summary { border-bottom: 1px solid var(--line); }
+.detail-body { padding: .85rem 1rem 1rem; }
+.detail-body > :first-child { margin-top: 0; }
+.detail-body .check { margin-top: .9rem; }
+.guide-docs { list-style: none; padding: 0; margin: .85rem 0 0; }
+.guide-docs li + li { margin-top: .75rem; }
+progress { display: block; width: 100%; height: .6rem; margin-top: .5rem; border: 0; border-radius: 999px; overflow: hidden; background: var(--soft); color: var(--primary); }
+progress::-webkit-progress-bar { background: var(--soft); }
+progress::-webkit-progress-value { background: var(--primary); }
+progress::-moz-progress-bar { background: var(--primary); }
+.progress-box { margin-bottom: 1rem; }
+.statement-text { margin-top: .7rem; min-height: 22rem; resize: vertical; line-height: 1.6; }
+.copy-status { min-height: 1.3em; }
+
+@media (max-width: 790px) {
+  .masthead { flex-wrap: wrap; gap: .5rem 1rem; }
+  .wrap { width: calc(100% - 2rem); }
+  .hero { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .form-layout, .guide-layout, .grid-three, .law-grid { grid-template-columns: 1fr; }
+  .site-nav a { font-size: .82rem; padding: .55rem .49rem; }
+  .brand { font-size: .94rem; }
+  .button { min-height: 46px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+:root {
+  --bg: #f6f5f1;
+  --surface: #fffefa;
+  --soft: #edf1f5;
+  --ink: #142439;
+  --muted: #47576b;
+  --line: #d4dce3;
+  --link: #194e75;
+  --primary: #183855;
+  --focus: #4b7193;
+  --navy: #142b42;
+  --navy-deep: #102236;
+  --accent: #e7ce9e;
+  --accent-line: #9f7949;
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #111821;
+  --surface: #1a2531;
+  --soft: #222f3d;
+  --ink: #edf2f7;
+  --muted: #bcc9d7;
+  --line: #425366;
+  --link: #b6d9f7;
+  --primary: #bfdbef;
+  --on-primary: #12253a;
+  --focus: #aad1f0;
+  --danger: #ffbbc2;
+  --danger-bg: #462932;
+  --shadow: 0 16px 40px #0004;
+  --accent-line: #cca26f;
+}
+.site-header { position: relative; z-index: 5; }
+.masthead { gap: .65rem 1.15rem; }
+.brand { margin-right: auto; }
+.brand-mark { background: var(--navy); color: #fcf5e6; border: 1px solid #a78a60; border-radius: 8px; }
+.header-controls { display: flex; align-items: center; gap: .45rem; order: 2; }
+.header-button { display: inline-flex; align-items: center; justify-content: center; gap: .45rem; min-height: 42px; border: 1px solid var(--line); border-radius: 8px; padding: .45rem .63rem; background: var(--surface); font-size: .82rem; font-weight: 650; white-space: nowrap; }
+.header-button:hover { background: var(--soft); }
+.menu-toggle { display: none; }
+.site-nav a[aria-current='page'] { box-shadow: inset 0 -2px 0 var(--accent-line); }
+h1 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 500; letter-spacing: -.046em; }
+.hero h1 { font-size: clamp(2.65rem, 5.25vw, 4.35rem); line-height: 1.02; max-width: 16ch; }
+.hero .lead { max-width: 53ch; }
+.hero { gap: clamp(1.6rem, 5vw, 4.5rem); padding-top: 0; margin-bottom: clamp(2.8rem, 6vw, 4.5rem); }
+.hero-aside { background: linear-gradient(140deg, var(--navy), var(--navy-deep)); color: #f5f7fb; border-color: #2a435f; border-radius: 16px; box-shadow: var(--shadow); padding: clamp(1.25rem, 4vw, 2.3rem); }
+.hero-aside h2 { color: #fffaf1; }
+.hero-aside ul { margin-top: 1.25rem; }
+.hero-aside li { padding: .9rem 0; line-height: 1.35; }
+.hero-aside li:last-child { padding-bottom: 0; }
+.hero-aside .icon { width: 2.15rem; height: 2.15rem; color: var(--accent); background: #ffffff0d; border: 1px solid #e7ce9e54; border-radius: 8px; }
+.steps-home .card { min-height: 146px; }
+.step-label { font-size: .84rem; margin-bottom: .8rem; }
+.page-head h1 { font-size: clamp(2.55rem, 5.5vw, 4.35rem); }
+.content-section { margin-bottom: clamp(1.55rem, 4vw, 2.55rem); }
+.card, .note { border-radius: 13px; }
+.note { border-inline-start-color: var(--accent-line); }
+.privacy h2 { display: flex; align-items: center; gap: .5rem; }
+.privacy .icon { color: var(--link); }
+.button, .header-button, .source-link { transition: background .2s, filter .2s, color .2s, border-color .2s; }
+.button:not(.secondary):hover { filter: brightness(.9); }
+.result-top { background: var(--navy); color: #fbf7f0; border-bottom: 3px solid var(--accent-line); }
+.result-top h2 { font-size: 1.15rem; }
+.result-amount { line-height: 1.2; margin-top: .45rem; }
+.result-empty { min-height: 11rem; background: var(--soft); border-style: dashed; }
+.results.arrive { animation: result-appear .27s cubic-bezier(.2,.7,.4,1) both; }
+@keyframes result-appear {
+  from { opacity: 0; transform: translateY(9px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.calc-progress { margin: 1rem 0 .55rem; font-size: .86rem; color: var(--muted); }
+.formula-heading, .breakdown { margin-top: 1rem; }
+.formula { font-variant-numeric: tabular-nums; }
+.source-link { border-radius: 4px; padding: .1em .25em; background: var(--soft); }
+.law-meta { color: var(--muted); }
+.law-meta strong { color: var(--link); }
+.tooltip { display: inline-block; position: relative; vertical-align: baseline; }
+.tooltip summary { display: inline-grid; place-items: center; width: 1.35rem; height: 1.35rem; list-style: none; border: 1px solid var(--line); border-radius: 100%; color: var(--link); background: var(--soft); font-size: .8rem; font-weight: 750; }
+.tooltip summary::-webkit-details-marker { display: none; }
+.tooltip-body { position: absolute; z-index: 4; inset: auto auto auto 0; width: min(16rem, 58vw); margin-top: .35rem; padding: .65rem; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); box-shadow: var(--shadow); color: var(--ink); font-size: .85rem; line-height: 1.4; font-weight: 400; letter-spacing: normal; }
+.faq details[open] .detail-body, .guide-step[open] .detail-body { animation: result-appear .19s ease-out; }
+.icon { display: inline-grid; place-items: center; width: 1.3rem; height: 1.3rem; flex: none; position: relative; }
+.icon::before, .icon::after { content: ''; position: absolute; box-sizing: border-box; }
+.icon-menu::before { width: .95rem; height: 2px; background: currentColor; box-shadow: 0 -.27rem currentColor, 0 .27rem currentColor; }
+.menu-toggle[aria-expanded='true'] .icon-menu::before { box-shadow: none; transform: rotate(45deg); }
+.menu-toggle[aria-expanded='true'] .icon-menu::after { width: .95rem; height: 2px; background: currentColor; transform: rotate(-45deg); }
+.icon-calendar::before { width: .98rem; height: .89rem; border: 1.5px solid; border-radius: 2px; }
+.icon-calendar::after { width: .86rem; height: 1.5px; top: calc(50% - .15rem); background: currentColor; }
+.icon-clock::before, .icon-theme::before { width: .98rem; height: .98rem; border: 1.5px solid; border-radius: 50%; }
+.icon-clock::after { width: .31rem; height: .29rem; top: calc(50% - .26rem); left: 50%; border-left: 1.5px solid; border-bottom: 1.5px solid; }
+.icon-theme::after { width: .42rem; height: .88rem; left: 50%; border-radius: 0 .55rem .55rem 0; background: currentColor; }
+.icon-lock::before { width: .8rem; height: .61rem; top: .53rem; border: 1.5px solid; border-radius: 2px; }
+.icon-lock::after { width: .46rem; height: .48rem; top: .17rem; border: 1.5px solid; border-bottom: 0; border-radius: 6px 6px 0 0; }
+.icon-money { font-weight: 750; }
+
+@media (max-width: 790px) {
+  .masthead { min-height: 66px; }
+  .header-controls { order: initial; }
+  .menu-toggle { display: inline-flex; }
+  .site-nav { flex: 1 0 100%; }
+  [data-ui='ready'] .site-nav { display: grid; grid-template-columns: 1fr; padding: .4rem .25rem .7rem; gap: .22rem; border-top: 1px solid var(--line); }
+  [data-ui='ready'] .site-nav a { font-size: .93rem; padding: .8rem; }
+  .hero h1 { max-width: 15ch; }
+  .hero-aside { width: 100%; }
+}
+@media (max-width: 440px) {
+  .masthead { gap: .45rem; }
+  .header-controls { gap: .3rem; }
+  .header-button { padding-inline: .52rem; }
+  .header-button:first-child .icon { display: none; }
+}
+@media (max-width: 380px) {
+  .brand { gap: .4rem; font-size: .88rem; }
+  .brand-mark { width: 30px; height: 30px; }
+  .masthead { gap: .5rem; }
+  .header-controls { gap: .27rem; }
+  .header-button { padding-inline: .38rem; }
+  .header-button .icon { display: none; }
+}
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen selection:bg-brand-500 selection:text-white">
-
-  <!-- ==================== HEADER ==================== -->
-  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <!-- Logo -->
-        <div class="flex items-center gap-2.5 cursor-pointer" onclick="switchTab('main')">
-          <div class="p-2 bg-brand-600 text-white rounded-xl shadow-md shadow-brand-600/20">
-            <i data-lucide="scale" class="w-6 h-6"></i>
-          </div>
-          <div>
-            <span class="text-xl font-bold text-slate-900 tracking-tight">Еңбекақы <span class="text-brand-600">Инфо</span></span>
-            <span class="block text-[10px] text-slate-500 font-semibold uppercase tracking-wider">Правовая защита РК</span>
-          </div>
-        </div>
-
-        <!-- Desktop Navigation Tabs -->
-        <nav class="hidden md:flex space-x-1 bg-slate-100 p-1.5 rounded-xl border border-slate-200/80">
-          <button onclick="switchTab('main')" id="tab-btn-main" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 bg-brand-50 text-brand-700 shadow-sm border border-brand-200/60">
-            Главная
-          </button>
-          <button onclick="switchTab('calc')" id="tab-btn-calc" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 text-slate-600 hover:text-slate-900">
-            Калькулятор
-          </button>
-          <button onclick="switchTab('law')" id="tab-btn-law" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 text-slate-600 hover:text-slate-900">
-            Правовая база
-          </button>
-          <button onclick="switchTab('steps')" id="tab-btn-steps" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 text-slate-600 hover:text-slate-900">
-            Алгоритм действий
-          </button>
-        </nav>
-
-        <!-- Mobile menu toggle -->
-        <div class="md:hidden">
-          <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2.5 text-slate-600 hover:text-slate-900 focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center">
-            <i data-lucide="menu" class="w-6 h-6"></i>
-          </button>
-        </div>
+<body class="interactive">
+  <a class="skip" href="#main">К содержанию</a>
+  <header class="site-header">
+    <div class="wrap masthead">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">₸</span> Пеня за зарплату</a>
+      <div class="header-controls" hidden>
+        <button class="header-button" id="theme-toggle" type="button"><span class="icon icon-theme" aria-hidden="true"></span> <span id="theme-text">Светлая</span></button>
+        <button class="header-button menu-toggle" id="menu-toggle" type="button" aria-controls="navigation" aria-expanded="false"><span class="icon icon-menu" aria-hidden="true"></span> <span>Меню</span></button>
       </div>
-    </div>
-
-    <!-- Mobile Nav Sub-menu -->
-    <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-4 space-y-1 shadow-lg">
-      <button onclick="switchTab('main')" id="mobile-tab-btn-main" class="mobile-tab-btn block w-full text-left px-4 py-3 text-base font-semibold rounded-xl text-brand-700 bg-brand-50 border border-brand-200/60">Главная</button>
-      <button onclick="switchTab('calc')" id="mobile-tab-btn-calc" class="mobile-tab-btn block w-full text-left px-4 py-3 text-base font-medium rounded-xl text-slate-700 hover:bg-slate-50">Калькулятор</button>
-      <button onclick="switchTab('law')" id="mobile-tab-btn-law" class="mobile-tab-btn block w-full text-left px-4 py-3 text-base font-medium rounded-xl text-slate-700 hover:bg-slate-50">Правовая база</button>
-      <button onclick="switchTab('steps')" id="mobile-tab-btn-steps" class="mobile-tab-btn block w-full text-left px-4 py-3 text-base font-medium rounded-xl text-slate-700 hover:bg-slate-50">Алгоритм действий</button>
+      <nav class="site-nav" id="navigation" aria-label="Основное меню">
+        <a href="index.html" aria-current="page">Главная</a>
+        <a href="calculator.html">Калькулятор пени</a>
+        <a href="law.html">Правовая база</a>
+        <a href="guide.html">Инструкция</a>
+      </nav>
     </div>
   </header>
-
-  <!-- MAIN CONTENT CONTAINER -->
-  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-
-    <!-- ==================== SECTION 1: ГЛАВНАЯ ==================== -->
-    <section id="tab-main" class="tab-content space-y-8 sm:space-y-12">
-      <!-- Hero Block -->
-      <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-brand-900 rounded-3xl p-6 sm:p-12 text-white shadow-xl relative overflow-hidden">
-        <div class="relative z-10 max-w-3xl space-y-6">
-          
-          <!-- AI Badge -->
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 text-brand-300 text-xs font-semibold border border-brand-500/30 backdrop-blur">
-            <i data-lucide="bot" class="w-4 h-4 text-brand-400"></i>
-            <span>Проект и его алгоритмы полностью разработаны с использованием ИИ в учебных целях</span>
-          </div>
-
-          <h1 class="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
-            Задержка зарплаты? <br><span class="text-brand-500">Рассчитайте законную пеню</span>
-          </h1>
-          <p class="text-slate-300 text-sm sm:text-lg leading-relaxed">
-            Удобный онлайн-инструмент для работников в Казахстане. Узнайте точный размер компенсации за каждый день просрочки и сформируйте официальную претензию работодателю за 1 минуту.
-          </p>
-          <div class="pt-2 flex flex-col sm:flex-row gap-3.5">
-            <button onclick="switchTab('calc')" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl shadow-lg shadow-brand-600/30 hover:shadow-brand-500/40 transition duration-200 min-h-[44px]">
-              <i data-lucide="calculator" class="w-5 h-5"></i> Рассчитать пеню прямо сейчас
-            </button>
-            <button onclick="switchTab('law')" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold rounded-xl border border-slate-700 transition duration-200 min-h-[44px]">
-              <i data-lucide="book-open" class="w-5 h-5"></i> Нормативная база
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Feature Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
-          <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 mb-4">
-            <i data-lucide="gavel" class="w-6 h-6"></i>
-          </div>
-          <h3 class="text-lg font-bold text-slate-900 mb-2">Точный расчет по закону</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">Учитывает 1.25-кратную базовую ставку Национального Банка РК за каждый день просрочки выплаты по п. 4 ст. 113 ТК РК.</p>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
-          <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 mb-4">
-            <i data-lucide="file-text" class="w-6 h-6"></i>
-          </div>
-          <h3 class="text-lg font-bold text-slate-900 mb-2">Готовая претензия</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">Автоматически формирует юридически грамотный текст обращения к работодателю с требованием выплаты долга и пени.</p>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
-          <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 mb-4">
-            <i data-lucide="shield" class="w-6 h-6"></i>
-          </div>
-          <h3 class="text-lg font-bold text-slate-900 mb-2">100% Приватность</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">Все расчеты проводятся исключительно внутри вашего браузера. Никакие персональные данные не передаются и не сохраняются.</p>
-        </div>
-      </div>
-
-      <!-- AI Development Notice -->
-      <div class="bg-gradient-to-r from-indigo-50 via-sky-50 to-emerald-50 rounded-2xl p-5 sm:p-6 border border-indigo-100 flex items-start gap-4 shadow-sm">
-        <div class="p-3 bg-white rounded-xl text-indigo-600 shadow-sm shrink-0 hidden sm:block">
-          <i data-lucide="sparkles" class="w-6 h-6"></i>
-        </div>
-        <div>
-          <h4 class="text-base font-bold text-indigo-950 mb-1 flex items-center gap-2">
-            <i data-lucide="sparkles" class="w-5 h-5 text-indigo-600 sm:hidden"></i>
-            Разработано с помощью ИИ-технологий
-          </h4>
-          <p class="text-sm text-slate-700 leading-relaxed">
-            Этот сервис создан специально для помощи работникам, юристам и HR-специалистам Республики Казахстан. Алгоритм опирается на действующие нормы Трудового кодекса РК и Кодекса об административных правонарушениях РК.
-          </p>
-        </div>
-      </div>
-
-      <!-- Security Disclaimer -->
-      <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5 flex items-start gap-3 text-amber-900 text-sm">
-        <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i>
-        <p class="leading-relaxed">
-          <strong>Обратите внимание:</strong> Инструмент предназначен для самостоятельного расчета и подготовки первичных документов. Информационные материалы не заменяют очную юридическую консультацию в сложных индивидуальных ситуациях.
-        </p>
-      </div>
-    </section>
-
-
-    <!-- ==================== SECTION 2: КАЛЬКУЛЯТОР ==================== -->
-    <section id="tab-calc" class="tab-content hidden space-y-6 sm:space-y-8">
-      <div class="max-w-4xl mx-auto">
-        <div class="mb-6">
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Калькулятор пени за просрочку</h2>
-          <p class="text-slate-600 text-sm mt-1">Заполните параметры задолженности для автоматического расчета пени по ст. 113 ТК РК.</p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
-          <!-- Form -->
-          <div class="lg:col-span-7 bg-white p-5 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-5">
-            <div>
-              <label for="debt-amount" class="block text-sm font-semibold text-slate-800 mb-2">Сумма задолженности (₸)</label>
-              <div class="relative">
-                <input type="number" id="debt-amount" placeholder="Например: 250000" min="0" step="1000" oninput="calculatePenalty()"
-                       class="w-full px-4 py-3.5 bg-slate-50 border border-slate-300 rounded-xl font-medium focus:ring-2 focus:ring-brand-600 focus:bg-white outline-none transition text-base">
-                <span class="absolute right-4 top-3.5 text-slate-400 font-bold text-sm">KZT</span>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label for="date-due" class="block text-sm font-semibold text-slate-800 mb-2">Дата выплаты по договору</label>
-                <input type="date" id="date-due" onchange="calculatePenalty()"
-                       class="w-full px-3 py-3 bg-slate-50 border border-slate-300 rounded-xl font-medium focus:ring-2 focus:ring-brand-600 focus:bg-white outline-none transition text-sm min-h-[44px]">
-              </div>
-              <div>
-                <label for="date-actual" class="block text-sm font-semibold text-slate-800 mb-2">Дата фактического расчета</label>
-                <input type="date" id="date-actual" onchange="calculatePenalty()"
-                       class="w-full px-3 py-3 bg-slate-50 border border-slate-300 rounded-xl font-medium focus:ring-2 focus:ring-brand-600 focus:bg-white outline-none transition text-sm min-h-[44px]">
-              </div>
-            </div>
-
-            <div>
-              <div class="flex items-center justify-between mb-2">
-                <label for="rate-nb" class="block text-sm font-semibold text-slate-800">Базовая ставка Нацбанка РК (%)</label>
-                <span class="text-[11px] font-semibold text-brand-700 bg-brand-50 px-2 py-0.5 rounded border border-brand-200/60">НБ РК: 14.25%</span>
-              </div>
-              <div class="relative">
-                <input type="number" id="rate-nb" value="14.25" step="0.25" min="0" oninput="calculatePenalty()"
-                       class="w-full px-4 py-3.5 bg-slate-50 border border-slate-300 rounded-xl font-medium focus:ring-2 focus:ring-brand-600 focus:bg-white outline-none transition text-base">
-                <span class="absolute right-4 top-3.5 text-slate-400 font-bold text-sm">%</span>
-              </div>
-              <p class="text-[11px] text-slate-500 mt-1.5">Формула использует 1.25-кратный коэффициент (14.25% × 1.25 = 17.8125% годовых)</p>
-            </div>
-          </div>
-
-          <!-- Results Panel -->
-          <div class="lg:col-span-5 flex flex-col justify-between bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-6 sm:p-8 rounded-2xl shadow-xl border border-slate-800 space-y-6">
-            <div>
-              <h3 class="text-lg font-bold text-slate-200 border-b border-slate-700/80 pb-3 mb-6 flex items-center justify-between">
-                <span>Итоговый результат</span>
-                <i data-lucide="receipt" class="w-5 h-5 text-brand-400"></i>
-              </h3>
-
-              <div class="space-y-5">
-                <div>
-                  <span class="text-xs text-slate-400 uppercase tracking-wider block font-semibold mb-1">Дней просрочки</span>
-                  <span id="res-days" class="text-2xl font-bold text-white">0 дней</span>
-                </div>
-
-                <div>
-                  <span class="text-xs text-slate-400 uppercase tracking-wider block font-semibold mb-1">Рассчитанная пеня</span>
-                  <span id="res-penalty" class="text-3xl sm:text-4xl font-extrabold text-emerald-400 tracking-tight block">0 ₸</span>
-                </div>
-
-                <div class="pt-3 border-t border-slate-700/80">
-                  <span class="text-xs text-slate-400 uppercase tracking-wider block font-semibold mb-1">Общая сумма к выплате</span>
-                  <span id="res-total" class="text-xl font-bold text-slate-100">0 ₸</span>
-                </div>
-              </div>
-
-              <!-- Formula & Detailed Breakdown -->
-              <div class="mt-6 space-y-3">
-                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider block">Детализация расчета</span>
-                
-                <div class="bg-slate-50 font-mono text-xs text-slate-800 p-3.5 rounded-xl border border-slate-200 shadow-inner overflow-x-auto break-words whitespace-pre-wrap">
-                  Пеня = (Долг × (Ставка × 1.25) / 365) × Дни / 100
-                </div>
-
-                <div id="calc-steps-breakdown" class="bg-slate-800/80 border border-slate-700 p-3.5 rounded-xl text-xs space-y-2 text-slate-300">
-                  <div class="flex justify-between border-b border-slate-700/60 pb-1.5">
-                    <span class="text-slate-400">1. Ставка × 1.25:</span>
-                    <span id="step-rate-annual" class="font-mono text-white">17.8125%</span>
-                  </div>
-                  <div class="flex justify-between border-b border-slate-700/60 pb-1.5">
-                    <span class="text-slate-400">2. Дневная ставка:</span>
-                    <span id="step-rate-daily" class="font-mono text-white">0.0488%</span>
-                  </div>
-                  <div class="flex justify-between border-b border-slate-700/60 pb-1.5">
-                    <span class="text-slate-400">3. Пеня за 1 день:</span>
-                    <span id="step-penalty-daily" class="font-mono font-semibold text-emerald-400">0 ₸</span>
-                  </div>
-                  <div class="flex justify-between pt-0.5">
-                    <span class="text-slate-400">4. Итого за N дней:</span>
-                    <span id="step-penalty-total" class="font-mono font-bold text-emerald-400">0 ₸</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Message placeholder if no delay -->
-              <div id="no-delay-msg" class="hidden mt-4 p-3 bg-slate-800/90 border border-amber-500/40 rounded-xl text-amber-300 text-xs flex items-center gap-2">
-                <i data-lucide="info" class="w-4 h-4 shrink-0 text-amber-400"></i>
-                <span>Просрочка отсутствует или дата платежа еще не наступила.</span>
-              </div>
-            </div>
-
-            <div class="pt-2">
-              <button id="btn-generate-claim" onclick="generateClaimModal()" disabled
-                      class="w-full py-3.5 px-6 bg-brand-600 hover:bg-brand-500 disabled:bg-slate-800 disabled:text-slate-600 disabled:cursor-not-allowed text-white font-bold rounded-xl transition duration-200 flex items-center justify-center gap-2 shadow-lg shadow-brand-600/20 min-h-[44px]">
-                <i data-lucide="file-check-2" class="w-5 h-5"></i> Сформировать претензию
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ==================== SECTION 3: ПРАВОВАЯ БАЗА ==================== -->
-    <section id="tab-law" class="tab-content hidden space-y-6 sm:space-y-10">
+  <main class="wrap" id="main" tabindex="-1">
+    <section class="hero content-section" aria-labelledby="hero-title">
       <div>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Правовая база Республики Казахстан</h2>
-        <p class="text-slate-600 text-sm mt-1">Официальные нормы Трудового кодекса и Кодекса об административных правонарушениях РК.</p>
+        <h1 id="hero-title">Задержали зарплату? Проверьте размер пени</h1>
+        <p class="lead">Узнайте, когда работодатель должен выплатить пеню за задержку зарплаты, оцените её размер и подготовьте заявление работодателю.</p>
+        <div class="actions"><a class="button" href="calculator.html">Рассчитать пеню</a> <a class="button secondary" href="law.html">Что говорит закон</a></div>
       </div>
-
-      <!-- ст. 113 ТК РК -->
-      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-8 shadow-sm space-y-4">
-        <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-          <div class="p-2.5 bg-brand-50 text-brand-600 rounded-xl shrink-0">
-            <i data-lucide="book-marked" class="w-6 h-6"></i>
-          </div>
-          <div>
-            <h3 class="text-lg sm:text-xl font-bold text-slate-900">Пункт 4 статьи 113 Трудового кодекса РК</h3>
-            <span class="text-xs font-semibold text-brand-600">Порядок и сроки выплаты заработной платы</span>
-          </div>
-        </div>
-
-        <blockquote class="bg-slate-50 border-l-4 border-brand-600 p-4 text-slate-700 italic text-sm leading-relaxed rounded-r-xl">
-          «При невыплате заработной платы работодателем в полном объеме и в сроки, которые установлены трудовым, коллективным договорами, работодатель несет ответственность в соответствии с законами Республики Казахстан. Работодатель выплачивает работнику задолженность и пеню за период задержки платежа. Размер пени рассчитывается исходя из 1,25-кратной базовой ставки Национального Банка Республики Казахстан на день исполнения обязательства по выплате заработной платы и начисляется за каждый просроченный календарный день, начиная со следующего дня, когда должна быть выплачена заработная плата, и заканчивая днем выплаты.»
-        </blockquote>
-
-        <div class="pt-2 flex items-start gap-2.5 text-xs text-slate-600 bg-slate-50 p-3.5 rounded-xl border border-slate-200/80">
-          <i data-lucide="clock" class="w-4 h-4 text-brand-600 shrink-0 mt-0.5"></i>
-          <span class="leading-relaxed"><strong>Срок расчета при увольнении:</strong> Согласно п. 4 ст. 113 ТК РК, при прекращении трудового договора выплата сумм, причитающихся работнику, производится не позднее 3 (трех) рабочих дней после его прекращения.</span>
-        </div>
-      </div>
-
-      <!-- Таблица штрафов ст. 87 КоАП РК -->
-      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-8 shadow-sm space-y-6">
-        <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-          <div class="p-2.5 bg-rose-50 text-rose-600 rounded-xl shrink-0">
-            <i data-lucide="shield-alert" class="w-6 h-6"></i>
-          </div>
-          <div>
-            <h3 class="text-lg sm:text-xl font-bold text-slate-900">Штрафы для работодателя по ст. 87 КоАП РК</h3>
-            <span class="text-xs font-semibold text-rose-600">Административная ответственность за невыплату заработной платы</span>
-          </div>
-        </div>
-
-        <div class="overflow-x-auto rounded-xl border border-slate-200">
-          <table class="w-full text-left border-collapse min-w-[500px]">
-            <thead>
-              <tr class="border-b border-slate-200 bg-slate-50 text-slate-700 text-xs uppercase font-bold tracking-wider">
-                <th class="p-4">Категория субъекта / Должность</th>
-                <th class="p-4 text-center">Размер штрафа (МРП)</th>
-                <th class="p-4">Правовая норма</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100 text-sm">
-              <tr class="hover:bg-slate-50">
-                <td class="p-4 font-semibold text-slate-800">Должностные лица</td>
-                <td class="p-4 text-center font-bold text-rose-600 whitespace-nowrap">30 МРП</td>
-                <td class="p-4 text-slate-500 whitespace-nowrap">ч. 1 ст. 87 КоАП РК</td>
-              </tr>
-              <tr class="hover:bg-slate-50">
-                <td class="p-4 font-semibold text-slate-800">Субъекты малого предпринимательства / НКО</td>
-                <td class="p-4 text-center font-bold text-rose-600 whitespace-nowrap">60 МРП</td>
-                <td class="p-4 text-slate-500 whitespace-nowrap">ч. 1 ст. 87 КоАП РК</td>
-              </tr>
-              <tr class="hover:bg-slate-50">
-                <td class="p-4 font-semibold text-slate-800">Субъекты среднего предпринимательства</td>
-                <td class="p-4 text-center font-bold text-rose-600 whitespace-nowrap">100 МРП</td>
-                <td class="p-4 text-slate-500 whitespace-nowrap">ч. 1 ст. 87 КоАП РК</td>
-              </tr>
-              <tr class="hover:bg-slate-50">
-                <td class="p-4 font-semibold text-slate-800">Субъекты крупного предпринимательства</td>
-                <td class="p-4 text-center font-bold text-rose-600 whitespace-nowrap">150 МРП</td>
-                <td class="p-4 text-slate-500 whitespace-nowrap">ч. 1 ст. 87 КоАП РК</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <p class="text-xs text-slate-500 bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 leading-relaxed">
-          * Действия, совершенные повторно в течение года после наложения административного взыскания, влекут увеличенные штрафы (до 300 МРП по ч. 2 ст. 87 КоАП РК).
-        </p>
-      </div>
-
-      <!-- Официальные первоисточники -->
-      <div class="bg-slate-900 text-white rounded-2xl p-5 sm:p-8 shadow-md">
-        <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
-          <i data-lucide="external-link" class="w-5 h-5 text-brand-400"></i> Официальная проверка (Первоисточники)
-        </h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <a href="https://adilet.zan.kz/rus/docs/K1500000414" target="_blank" rel="noopener noreferrer" 
-             class="flex items-center justify-between p-4 bg-slate-800 hover:bg-slate-700/80 rounded-xl border border-slate-700 transition min-h-[44px]">
-            <div>
-              <span class="block font-bold text-sm text-white">ИПС «Әділет»</span>
-              <span class="text-xs text-slate-400">Трудовой кодекс РК (ст. 113)</span>
-            </div>
-            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-400"></i>
-          </a>
-
-          <a href="https://nationalbank.kz" target="_blank" rel="noopener noreferrer" 
-             class="flex items-center justify-between p-4 bg-slate-800 hover:bg-slate-700/80 rounded-xl border border-slate-700 transition min-h-[44px]">
-            <div>
-              <span class="block font-bold text-sm text-white">Национальный Банк РК</span>
-              <span class="text-xs text-slate-400">Актуальная базовая ставка</span>
-            </div>
-            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-400"></i>
-          </a>
-        </div>
-      </div>
+      <aside class="hero-aside" aria-labelledby="inputs-title">
+        <h2 id="inputs-title">Что понадобится</h2>
+        <ul>
+          <li><span class="icon icon-money" aria-hidden="true">₸</span>Сумма задержанной зарплаты</li>
+          <li><span class="icon icon-calendar" aria-hidden="true"></span>Установленная дата выплаты</li>
+          <li><span class="icon icon-clock" aria-hidden="true"></span>Фактическая дата или отметка, что выплаты ещё не было</li>
+        </ul>
+      </aside>
     </section>
-
-
-    <!-- ==================== SECTION 4: АЛГОРИТМ ДЕЙСТВИЙ ==================== -->
-    <section id="tab-steps" class="tab-content hidden space-y-6 sm:space-y-8">
-      <div>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Пошаговый алгоритм защиты прав</h2>
-        <p class="text-slate-600 text-sm mt-1">Четкая последовательность действий при невыплате заработной платы в РК.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-        <!-- Step 1 -->
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between">
-          <div class="space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 font-extrabold text-sm flex items-center justify-center">1</span>
-              <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Досудебный этап</span>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900">Письменная претензия</h3>
-            <p class="text-sm text-slate-600 leading-relaxed">
-              Направьте работодателю официальную претензию с расчетом долга и пени по ст. 113 ТК РК. Передайте через канцелярию (с отметкой на втором экземпляре) или отправьте заказным письмом с уведомлением.
-            </p>
-          </div>
-          <div class="pt-4 border-t border-slate-100 mt-4">
-            <button onclick="switchTab('calc')" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1">
-              Сформировать претензию в калькуляторе <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between">
-          <div class="space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 font-extrabold text-sm flex items-center justify-center">2</span>
-              <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Обязательный этап</span>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900">Согласительная комиссия</h3>
-            <p class="text-sm text-slate-600 leading-relaxed">
-              Согласно ст. 159 ТК РК, индивидуальные трудовые споры рассматриваются согласительной комиссией. Подайте заявление. Комиссия обязана рассмотреть спор в течение 15 рабочих дней.
-            </p>
-          </div>
-          <div class="pt-4 border-t border-slate-100 mt-4">
-            <span class="text-xs text-slate-500 font-medium">Срок обращения — 1 год со дня нарушения</span>
-          </div>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between">
-          <div class="space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 font-extrabold text-sm flex items-center justify-center">3</span>
-              <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Государственный контроль</span>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900">Инспекция труда (e-Otinish)</h3>
-            <p class="text-sm text-slate-600 leading-relaxed">
-              Подайте жалобу в Управление государственной инспекции труда через портал e-Otinish. Государственный инспектор проведет проверку и выдаст предписание о выплате с наложением штрафа по ст. 87 КоАП РК.
-            </p>
-          </div>
-          <div class="pt-4 border-t border-slate-100 mt-4">
-            <a href="https://eotinish.kz" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1">
-              Подать обращение через e-Otinish <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- Step 4 -->
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between">
-          <div class="space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 font-extrabold text-sm flex items-center justify-center">4</span>
-              <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Судебный порядок</span>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900">Обращение в суд</h3>
-            <p class="text-sm text-slate-600 leading-relaxed">
-              В случае неисполнения решения согласительной комиссии или для принудительного взыскания через судебных исполнителей подайте иск в суд. Инспекционное предписание также является исполнительным документом.
-            </p>
-          </div>
-          <div class="pt-4 border-t border-slate-100 mt-4">
-            <span class="text-xs text-slate-500 font-medium">Рассмотрение по месту нахождения работодателя</span>
-          </div>
-        </div>
-      </div>
+    <section class="content-section" aria-labelledby="how-title">
+      <h2 id="how-title">Как работает сервис</h2>
+      <ol class="grid-three steps-home">
+        <li class="card"><span class="step-label">Шаг 1</span><h3>Введите данные</h3><p>Укажите сумму и даты выплаты.</p></li>
+        <li class="card"><span class="step-label">Шаг 2</span><h3>Получите расчёт</h3><p>Сервис автоматически посчитает дни задержки и сумму пени.</p></li>
+        <li class="card"><span class="step-label">Шаг 3</span><h3>Создайте заявление</h3><p>Подготовьте текст обращения к работодателю.</p></li>
+      </ol>
     </section>
-
+    <div class="content-section info-stack">
+      <aside class="note privacy" id="privacy" aria-labelledby="privacy-title">
+      <h2 id="privacy-title"><span class="icon icon-lock" aria-hidden="true"></span>Ваши данные остаются у вас</h2>
+      <p>Регистрация не нужна. Для расчёта достаточно суммы и дат. Сайт не запрашивает ФИО, ИИН, настоящий адрес, телефон, название работодателя или банковские данные.</p>
+      <p>Расчёт и подготовка заявления выполняются в браузере. Введённые данные не отправляются на сервер и не записываются сайтом в локальное хранилище. Подставить свои данные вместо шаблонных обозначений можно в копии заявления.</p>
+    </aside>
+      <aside class="note"><h2>О расчёте</h2><p>Результат носит информационный характер и не заменяет индивидуальную юридическую консультацию.</p></aside>
+    </div>
+    <section class="content-section faq" aria-labelledby="faq-title">
+      <h2 id="faq-title">Частые вопросы</h2>
+      <details><summary>Учитываются ли выходные после начала задержки?</summary><div class="detail-body"><p>Да. Пеня начисляется за календарные дни, в том числе выходные и праздники. <a class="source-link" href="https://adilet.zan.kz/rus/docs/K1500000414" referrerpolicy="no-referrer">П. 3 ст. 113 ТК РК</a></p></div></details>
+      <details><summary>Можно ли рассчитать пеню, пока зарплата не выплачена?</summary><div class="detail-body"><p>Да. Отметьте, что зарплата ещё не выплачена. Сайт оценит сумму на текущую дату по проверенной ставке. Для окончательного расчёта применяется ставка на день фактической выплаты. <a class="source-link" href="https://adilet.zan.kz/rus/docs/K1500000414" referrerpolicy="no-referrer">П. 3 ст. 113 ТК РК</a></p></div></details>
+      <details><summary>Можно ли использовать сайт без персональных данных?</summary><div class="detail-body"><p>Да. Для расчёта нужны только сумма и даты. В заявлении останутся шаблонные обозначения, которые можно заменить после копирования.</p></div></details>
+    </section>
   </main>
-
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="bg-white border-t border-slate-200 mt-auto py-6 sm:py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-        <p class="text-center sm:text-left leading-relaxed">
-          © 2026 Еңбекақы Инфо. Данный инструмент создан исключительно для справочно-расчетных целей и не представляет собой официальную юридическую консультацию. Сайт работает без сбора и хранения персональных данных. Все расчеты выполняются в вашем браузере. Сделано с помощью ИИ в учебных целях.
-        </p>
-      </div>
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <span>Учебный юридический проект · Республика Казахстан</span>
+      <span>Материалы носят информационный характер.</span>
+      <span>Сайт создан с помощью ИИ.</span>
     </div>
   </footer>
+  <script>
+const rootElement = document.documentElement;
+const themeButton = document.getElementById('theme-toggle');
+const themeText = document.getElementById('theme-text');
+const menu = document.getElementById('navigation');
+const menuButton = document.getElementById('menu-toggle');
+const compact = window.matchMedia('(max-width: 790px)');
+const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+const pageLinks = Array.from(document.querySelectorAll('a[href]'))
+  .map(link => [link, link.getAttribute('href')])
+  .filter(([, href]) => /^(index|calculator|law|guide)\.html(?:#|$)/.test(href));
 
+const pageUrl = new URL(window.location.href);
+const requestedTheme = pageUrl.searchParams.get('theme');
+let explicitTheme = ['light', 'dark'].includes(requestedTheme) ? requestedTheme : null;
 
-  <!-- ==================== MODAL: ГЕНЕРАТОР ПРЕТЕНЗИИ ==================== -->
-  <div id="claim-modal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
-    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-100 overflow-hidden">
-      <!-- Modal Header -->
-      <div class="px-5 py-4 border-b border-slate-100 bg-slate-50 space-y-1">
-        <div class="flex items-center justify-between">
-          <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
-            <i data-lucide="file-text" class="w-5 h-5 text-brand-600"></i> Претензия о выплате зарплаты и пени
-          </h3>
-          <button onclick="closeClaimModal()" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center">
-            <i data-lucide="x" class="w-5 h-5"></i>
-          </button>
-        </div>
-        <div class="flex items-center gap-1.5 text-xs text-indigo-600 font-medium">
-          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-          <span>Текст заявления сгенерирован с использованием ИИ</span>
-        </div>
+function applyTheme() {
+  const theme = explicitTheme ?? (systemDark.matches ? 'dark' : 'light');
+  rootElement.dataset.theme = theme;
+  themeText.textContent = theme === 'dark' ? 'Тёмная' : 'Светлая';
+  themeButton.setAttribute('aria-label', theme === 'dark' ? 'Тема оформления. Переключить на светлую' : 'Тема оформления. Переключить на тёмную');
+  for (const [link, href] of pageLinks) {
+    const [path, fragment] = href.split('#');
+    const query = explicitTheme ? `?theme=${explicitTheme}` : '';
+    link.setAttribute('href', `${path}${query}${fragment ? '#' + fragment : ''}`);
+  }
+}
+
+themeButton.addEventListener('click', () => {
+  explicitTheme = rootElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  if (window.location.protocol !== 'file:') {
+    pageUrl.searchParams.set('theme', explicitTheme);
+    window.history.replaceState(null, '', pageUrl);
+  }
+  applyTheme();
+});
+systemDark.addEventListener('change', applyTheme);
+applyTheme();
+
+function setMenu(open) {
+  menu.hidden = compact.matches && !open;
+  menuButton.setAttribute('aria-expanded', String(compact.matches && open));
+}
+
+menuButton.addEventListener('click', () => setMenu(menu.hidden));
+compact.addEventListener('change', () => setMenu(false));
+menu.addEventListener('click', event => {
+  if (event.target.closest('a')) setMenu(false);
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
+    setMenu(false);
+    menuButton.focus();
+  }
+});
+document.addEventListener('click', event => {
+  if (!menu.contains(event.target) && !menuButton.contains(event.target)) setMenu(false);
+});
+rootElement.dataset.ui = 'ready';
+document.querySelector('.header-controls').hidden = false;
+setMenu(false);
+  </script>
+</body>
+</html>
+
+===== calculator.html =====
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; form-action 'none'; base-uri 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>Калькулятор пени · Пеня за задержку зарплаты в РК</title>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f5f6f8;
+  --surface: #fff;
+  --soft: #eef3f8;
+  --ink: #142338;
+  --muted: #46566a;
+  --line: #d5dee7;
+  --link: #164e79;
+  --primary: #173958;
+  --on-primary: #fff;
+  --focus: #316c98;
+  --danger: #a02032;
+  --danger-bg: #fff3f4;
+  --shadow: 0 18px 42px #172b4310;
+  font-family: Inter, 'Segoe UI', Arial, sans-serif;
+  font-size: 100%;
+  line-height: 1.55;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { min-width: 280px; }
+body { margin: 0; background: var(--bg); color: var(--ink); min-height: 100vh; display: flex; flex-direction: column; }
+a { color: var(--link); text-underline-offset: .2em; }
+button, input, textarea { font: inherit; color: inherit; }
+button, summary, input[type='checkbox'] { cursor: pointer; }
+button:disabled, input:disabled { cursor: default; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+h1, h2, h3 { line-height: 1.16; letter-spacing: -.026em; margin: 0; }
+h1 { font-size: clamp(2.15rem, 5vw, 3.7rem); }
+h2 { font-size: clamp(1.35rem, 3vw, 2rem); }
+h3 { font-size: 1.1rem; }
+p { margin: .65rem 0 0; }
+.wrap { width: min(1120px, calc(100% - 3rem)); margin-inline: auto; }
+.skip { position: absolute; top: .5rem; left: .5rem; z-index: 10; transform: translateY(-150%); background: var(--surface); padding: .65rem 1rem; }
+.skip:focus { transform: translateY(0); }
+.site-header { background: var(--surface); border-bottom: 1px solid var(--line); }
+.masthead { display: flex; justify-content: space-between; align-items: center; gap: 1.2rem; min-height: 76px; padding-block: .65rem; }
+.brand { display: inline-flex; align-items: center; gap: .65rem; color: var(--ink); text-decoration: none; font-weight: 750; white-space: nowrap; }
+.brand-mark { width: 37px; height: 37px; display: grid; place-items: center; color: var(--on-primary); background: var(--primary); border-radius: 9px; font-size: 1.18rem; }
+.site-nav { display: flex; flex-wrap: wrap; gap: .25rem; align-items: center; }
+.site-nav a { color: var(--muted); padding: .58rem .75rem; border-radius: 8px; text-decoration: none; font-size: .9rem; font-weight: 600; }
+.site-nav a:hover, .site-nav a[aria-current='page'] { color: var(--ink); background: var(--soft); }
+main { flex: 1; padding-block: clamp(2.25rem, 6vw, 5rem); }
+.site-footer { padding-block: 1.25rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .86rem; }
+.footer-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .45rem 1.2rem; }
+.muted, .lead, .hint { color: var(--muted); }
+.lead { font-size: clamp(1rem, 2vw, 1.13rem); max-width: 65ch; margin-top: 1rem; }
+.hint { font-size: .87rem; }
+.hint a { overflow-wrap: anywhere; }
+.page-head, .content-section { margin-bottom: 2rem; }
+.content-section:last-child { margin-bottom: 0; }
+.content-section > h2 { margin-bottom: 1rem; }
+.hero { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); align-items: center; gap: clamp(1.6rem, 6vw, 5.75rem); padding-block: .6rem 1rem; }
+.hero > *, .form-layout > *, .guide-layout > * { min-width: 0; }
+.actions { display: flex; flex-wrap: wrap; gap: .7rem; align-items: center; margin-top: 1.5rem; }
+.button { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; min-height: 44px; padding: .65rem 1rem; border: 1px solid var(--primary); border-radius: 8px; background: var(--primary); color: var(--on-primary); text-decoration: none; font-weight: 650; line-height: 1.25; text-align: center; }
+.button:hover { filter: brightness(1.12); }
+.button.secondary { border-color: var(--line); color: var(--ink); background: var(--surface); }
+.button.secondary:hover { border-color: var(--focus); background: var(--soft); filter: none; }
+.button:disabled { opacity: .58; }
+.card, .hero-aside, .note { background: var(--surface); border: 1px solid var(--line); border-radius: 13px; padding: clamp(1rem, 3vw, 1.55rem); }
+.card p, .note p { max-width: 68ch; }
+.hero-aside { background: var(--primary); color: var(--on-primary); padding: clamp(1.3rem, 4vw, 2rem); }
+.hero-aside ul { list-style: none; padding: 0; margin: .85rem 0 0; }
+.hero-aside li { display: flex; align-items: center; gap: .8rem; padding: .65rem 0; border-top: 1px solid #ffffff38; }
+.hero-aside p { color: inherit; }
+.note { background: var(--soft); border-inline-start: 4px solid var(--focus); }
+.note p:first-child, .card p:first-child { margin-top: 0; }
+.note h2 { font-size: 1.22rem; }
+.grid-three, .law-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, minmax(0,1fr)); }
+.law-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.info-stack { display: grid; gap: 1rem; }
+.steps-home { list-style: none; padding: 0; margin: 0; }
+.step-label { display: block; margin-bottom: .7rem; color: var(--link); font-weight: 750; }
+.interactive .button, .interactive .site-nav a, .interactive .steps-home .card { transition: background .2s, color .2s, border-color .2s, box-shadow .2s, transform .2s; }
+@media (hover: hover) { .interactive .steps-home .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); } }
+.form-layout, .guide-layout { display: grid; gap: 1.25rem; align-items: start; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.guide-layout { grid-template-columns: minmax(0, 1.7fr) minmax(0, .9fr); }
+.form-layout h2, .guide-layout h2 { margin-bottom: .35rem; }
+.field { margin-top: 1.05rem; }
+.field > label, .label { display: block; font-weight: 650; margin-bottom: .35rem; }
+input:not([type='checkbox']), textarea { width: 100%; min-width: 0; min-height: 46px; border: 1px solid var(--line); border-radius: 8px; padding: .62rem .75rem; background: var(--surface); }
+input:not([type='checkbox']):hover, textarea:hover { border-color: var(--focus); }
+input[aria-invalid='true'] { border-color: var(--danger); }
+input::placeholder { color: var(--muted); opacity: 1; }
+input[type='checkbox'] { accent-color: var(--primary); width: 1.13rem; height: 1.13rem; flex: none; margin: .15rem 0 0; }
+.check { display: flex; gap: .65rem; align-items: flex-start; }
+.check span { min-width: 0; }
+.status-field { margin-top: .8rem; }
+.field-error { margin: .35rem 0 0; color: var(--danger); font-size: .88rem; }
+.error-summary { color: var(--danger); background: var(--danger-bg); border-radius: 8px; padding: .7rem .85rem; margin-top: 1rem; }
+.results { padding: 0; overflow: hidden; }
+.result-body { padding: clamp(1rem, 3vw, 1.55rem); }
+.result-top { padding: clamp(1rem, 3vw, 1.55rem); background: var(--soft); border-bottom: 1px solid var(--line); }
+.result-amount { font-size: clamp(1.75rem, 4vw, 2.65rem); font-weight: 750; margin: .15rem 0 0; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.result-rows { margin: 0 0 1rem; }
+.result-rows div { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: .6rem; padding: .63rem 0; border-bottom: 1px solid var(--line); }
+.result-rows dd { margin: 0; text-align: right; font-weight: 700; overflow-wrap: anywhere; }
+.formula { padding: .65rem .8rem; background: var(--soft); border-radius: 6px; overflow-wrap: anywhere; }
+.numbered { padding-left: 1.4rem; margin: 1rem 0 0; }
+.numbered li { padding-inline-start: .2rem; margin-bottom: .7rem; }
+.numbered li p { margin-top: .15rem; }
+.source-link { display: inline-block; max-width: 100%; overflow-wrap: anywhere; font-weight: 650; }
+.sources { padding-left: 1.15rem; margin-block: .6rem 0; }
+.sources li + li { margin-top: .55rem; }
+.law-card { display: flex; flex-direction: column; gap: .75rem; align-items: flex-start; }
+.law-card p { margin-top: 0; }
+.law-card .citation-line { margin-top: auto; }
+.citation-line small { display: block; color: var(--muted); }
+.guide-step, .faq details { background: var(--surface); border: 1px solid var(--line); border-radius: 11px; }
+.guide-step + .guide-step, .faq details + details { margin-top: .65rem; }
+.guide-step summary, .faq summary { padding: .9rem 1rem; font-weight: 650; }
+.guide-step[open] summary, .faq details[open] summary { border-bottom: 1px solid var(--line); }
+.detail-body { padding: .85rem 1rem 1rem; }
+.detail-body > :first-child { margin-top: 0; }
+.detail-body .check { margin-top: .9rem; }
+.guide-docs { list-style: none; padding: 0; margin: .85rem 0 0; }
+.guide-docs li + li { margin-top: .75rem; }
+progress { display: block; width: 100%; height: .6rem; margin-top: .5rem; border: 0; border-radius: 999px; overflow: hidden; background: var(--soft); color: var(--primary); }
+progress::-webkit-progress-bar { background: var(--soft); }
+progress::-webkit-progress-value { background: var(--primary); }
+progress::-moz-progress-bar { background: var(--primary); }
+.progress-box { margin-bottom: 1rem; }
+.statement-text { margin-top: .7rem; min-height: 22rem; resize: vertical; line-height: 1.6; }
+.copy-status { min-height: 1.3em; }
+
+@media (max-width: 790px) {
+  .masthead { flex-wrap: wrap; gap: .5rem 1rem; }
+  .wrap { width: calc(100% - 2rem); }
+  .hero { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .form-layout, .guide-layout, .grid-three, .law-grid { grid-template-columns: 1fr; }
+  .site-nav a { font-size: .82rem; padding: .55rem .49rem; }
+  .brand { font-size: .94rem; }
+  .button { min-height: 46px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+:root {
+  --bg: #f6f5f1;
+  --surface: #fffefa;
+  --soft: #edf1f5;
+  --ink: #142439;
+  --muted: #47576b;
+  --line: #d4dce3;
+  --link: #194e75;
+  --primary: #183855;
+  --focus: #4b7193;
+  --navy: #142b42;
+  --navy-deep: #102236;
+  --accent: #e7ce9e;
+  --accent-line: #9f7949;
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #111821;
+  --surface: #1a2531;
+  --soft: #222f3d;
+  --ink: #edf2f7;
+  --muted: #bcc9d7;
+  --line: #425366;
+  --link: #b6d9f7;
+  --primary: #bfdbef;
+  --on-primary: #12253a;
+  --focus: #aad1f0;
+  --danger: #ffbbc2;
+  --danger-bg: #462932;
+  --shadow: 0 16px 40px #0004;
+  --accent-line: #cca26f;
+}
+.site-header { position: relative; z-index: 5; }
+.masthead { gap: .65rem 1.15rem; }
+.brand { margin-right: auto; }
+.brand-mark { background: var(--navy); color: #fcf5e6; border: 1px solid #a78a60; border-radius: 8px; }
+.header-controls { display: flex; align-items: center; gap: .45rem; order: 2; }
+.header-button { display: inline-flex; align-items: center; justify-content: center; gap: .45rem; min-height: 42px; border: 1px solid var(--line); border-radius: 8px; padding: .45rem .63rem; background: var(--surface); font-size: .82rem; font-weight: 650; white-space: nowrap; }
+.header-button:hover { background: var(--soft); }
+.menu-toggle { display: none; }
+.site-nav a[aria-current='page'] { box-shadow: inset 0 -2px 0 var(--accent-line); }
+h1 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 500; letter-spacing: -.046em; }
+.hero h1 { font-size: clamp(2.65rem, 5.25vw, 4.35rem); line-height: 1.02; max-width: 16ch; }
+.hero .lead { max-width: 53ch; }
+.hero { gap: clamp(1.6rem, 5vw, 4.5rem); padding-top: 0; margin-bottom: clamp(2.8rem, 6vw, 4.5rem); }
+.hero-aside { background: linear-gradient(140deg, var(--navy), var(--navy-deep)); color: #f5f7fb; border-color: #2a435f; border-radius: 16px; box-shadow: var(--shadow); padding: clamp(1.25rem, 4vw, 2.3rem); }
+.hero-aside h2 { color: #fffaf1; }
+.hero-aside ul { margin-top: 1.25rem; }
+.hero-aside li { padding: .9rem 0; line-height: 1.35; }
+.hero-aside li:last-child { padding-bottom: 0; }
+.hero-aside .icon { width: 2.15rem; height: 2.15rem; color: var(--accent); background: #ffffff0d; border: 1px solid #e7ce9e54; border-radius: 8px; }
+.steps-home .card { min-height: 146px; }
+.step-label { font-size: .84rem; margin-bottom: .8rem; }
+.page-head h1 { font-size: clamp(2.55rem, 5.5vw, 4.35rem); }
+.content-section { margin-bottom: clamp(1.55rem, 4vw, 2.55rem); }
+.card, .note { border-radius: 13px; }
+.note { border-inline-start-color: var(--accent-line); }
+.privacy h2 { display: flex; align-items: center; gap: .5rem; }
+.privacy .icon { color: var(--link); }
+.button, .header-button, .source-link { transition: background .2s, filter .2s, color .2s, border-color .2s; }
+.button:not(.secondary):hover { filter: brightness(.9); }
+.result-top { background: var(--navy); color: #fbf7f0; border-bottom: 3px solid var(--accent-line); }
+.result-top h2 { font-size: 1.15rem; }
+.result-amount { line-height: 1.2; margin-top: .45rem; }
+.result-empty { min-height: 11rem; background: var(--soft); border-style: dashed; }
+.results.arrive { animation: result-appear .27s cubic-bezier(.2,.7,.4,1) both; }
+@keyframes result-appear {
+  from { opacity: 0; transform: translateY(9px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.calc-progress { margin: 1rem 0 .55rem; font-size: .86rem; color: var(--muted); }
+.formula-heading, .breakdown { margin-top: 1rem; }
+.formula { font-variant-numeric: tabular-nums; }
+.source-link { border-radius: 4px; padding: .1em .25em; background: var(--soft); }
+.law-meta { color: var(--muted); }
+.law-meta strong { color: var(--link); }
+.tooltip { display: inline-block; position: relative; vertical-align: baseline; }
+.tooltip summary { display: inline-grid; place-items: center; width: 1.35rem; height: 1.35rem; list-style: none; border: 1px solid var(--line); border-radius: 100%; color: var(--link); background: var(--soft); font-size: .8rem; font-weight: 750; }
+.tooltip summary::-webkit-details-marker { display: none; }
+.tooltip-body { position: absolute; z-index: 4; inset: auto auto auto 0; width: min(16rem, 58vw); margin-top: .35rem; padding: .65rem; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); box-shadow: var(--shadow); color: var(--ink); font-size: .85rem; line-height: 1.4; font-weight: 400; letter-spacing: normal; }
+.faq details[open] .detail-body, .guide-step[open] .detail-body { animation: result-appear .19s ease-out; }
+.icon { display: inline-grid; place-items: center; width: 1.3rem; height: 1.3rem; flex: none; position: relative; }
+.icon::before, .icon::after { content: ''; position: absolute; box-sizing: border-box; }
+.icon-menu::before { width: .95rem; height: 2px; background: currentColor; box-shadow: 0 -.27rem currentColor, 0 .27rem currentColor; }
+.menu-toggle[aria-expanded='true'] .icon-menu::before { box-shadow: none; transform: rotate(45deg); }
+.menu-toggle[aria-expanded='true'] .icon-menu::after { width: .95rem; height: 2px; background: currentColor; transform: rotate(-45deg); }
+.icon-calendar::before { width: .98rem; height: .89rem; border: 1.5px solid; border-radius: 2px; }
+.icon-calendar::after { width: .86rem; height: 1.5px; top: calc(50% - .15rem); background: currentColor; }
+.icon-clock::before, .icon-theme::before { width: .98rem; height: .98rem; border: 1.5px solid; border-radius: 50%; }
+.icon-clock::after { width: .31rem; height: .29rem; top: calc(50% - .26rem); left: 50%; border-left: 1.5px solid; border-bottom: 1.5px solid; }
+.icon-theme::after { width: .42rem; height: .88rem; left: 50%; border-radius: 0 .55rem .55rem 0; background: currentColor; }
+.icon-lock::before { width: .8rem; height: .61rem; top: .53rem; border: 1.5px solid; border-radius: 2px; }
+.icon-lock::after { width: .46rem; height: .48rem; top: .17rem; border: 1.5px solid; border-bottom: 0; border-radius: 6px 6px 0 0; }
+.icon-money { font-weight: 750; }
+
+@media (max-width: 790px) {
+  .masthead { min-height: 66px; }
+  .header-controls { order: initial; }
+  .menu-toggle { display: inline-flex; }
+  .site-nav { flex: 1 0 100%; }
+  [data-ui='ready'] .site-nav { display: grid; grid-template-columns: 1fr; padding: .4rem .25rem .7rem; gap: .22rem; border-top: 1px solid var(--line); }
+  [data-ui='ready'] .site-nav a { font-size: .93rem; padding: .8rem; }
+  .hero h1 { max-width: 15ch; }
+  .hero-aside { width: 100%; }
+}
+@media (max-width: 440px) {
+  .masthead { gap: .45rem; }
+  .header-controls { gap: .3rem; }
+  .header-button { padding-inline: .52rem; }
+  .header-button:first-child .icon { display: none; }
+}
+@media (max-width: 380px) {
+  .brand { gap: .4rem; font-size: .88rem; }
+  .brand-mark { width: 30px; height: 30px; }
+  .masthead { gap: .5rem; }
+  .header-controls { gap: .27rem; }
+  .header-button { padding-inline: .38rem; }
+  .header-button .icon { display: none; }
+}
+  </style>
+</head>
+<body class="interactive">
+  <a class="skip" href="#main">К содержанию</a>
+  <header class="site-header">
+    <div class="wrap masthead">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">₸</span> Пеня за зарплату</a>
+      <div class="header-controls" hidden>
+        <button class="header-button" id="theme-toggle" type="button"><span class="icon icon-theme" aria-hidden="true"></span> <span id="theme-text">Светлая</span></button>
+        <button class="header-button menu-toggle" id="menu-toggle" type="button" aria-controls="navigation" aria-expanded="false"><span class="icon icon-menu" aria-hidden="true"></span> <span>Меню</span></button>
       </div>
-
-      <!-- Modal Body -->
-      <div class="p-4 sm:p-6 overflow-y-auto font-mono text-xs sm:text-sm leading-relaxed text-slate-800 bg-slate-50/50 space-y-4 whitespace-pre-wrap border-b border-slate-100 break-words overflow-x-auto" id="claim-text-container">
-        <!-- Dynamic text inserted via JS -->
+      <nav class="site-nav" id="navigation" aria-label="Основное меню">
+        <a href="index.html">Главная</a>
+        <a href="calculator.html" aria-current="page">Калькулятор пени</a>
+        <a href="law.html">Правовая база</a>
+        <a href="guide.html">Инструкция</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap" id="main" tabindex="-1">
+    <header class="page-head"><h1>Калькулятор пени</h1><p class="lead">Рассчитайте пеню за одну выплату. При нескольких сроках или частичных платежах суммы и периоды нужно оценивать отдельно.</p></header>
+    <div class="form-layout content-section">
+      <form class="card" id="calculator-form" autocomplete="off" novalidate>
+        <h2>Данные для расчёта</h2>
+        <div class="progress-box calc-progress"><p id="calculator-progress-label">Заполнено 0 из 3 полей</p><progress id="calculator-progress" value="0" max="3" aria-labelledby="calculator-progress-label"></progress></div>
+        
+      <div class="field">
+        <label for="calc-amount">Сумма задержанной зарплаты, ₸</label>
+        <input id="calc-amount" data-field="amount" type="text" inputmode="decimal" maxlength="27" placeholder="Например, 300 000" required aria-describedby="calc-amount-error">
+        <p class="field-error" id="calc-amount-error" data-error-for="amount" hidden></p>
       </div>
-
-      <!-- Modal Footer -->
-      <div class="px-5 py-4 bg-white flex flex-col sm:flex-row items-center justify-between gap-3">
-        <span class="text-xs text-slate-400 text-center sm:text-left">Заполните поля в скобках перед отправкой</span>
-        <div class="flex items-center gap-3 w-full sm:w-auto">
-          <button onclick="copyClaimText()" id="btn-copy-claim" class="flex-1 sm:flex-none px-5 py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition min-h-[44px]">
-            <i data-lucide="copy" class="w-4 h-4"></i> Скопировать текст
-          </button>
-          <button onclick="closeClaimModal()" class="flex-1 sm:flex-none px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-xs transition min-h-[44px]">
-            Закрыть
-          </button>
+      <div class="field">
+        <label for="calc-due">Установленная дата выплаты</label>
+        <input id="calc-due" data-field="due" type="date" required aria-describedby="calc-due-hint calc-due-error">
+        <p class="hint" id="calc-due-hint">Укажите срок с учётом выходных и праздников. <a class="source-link" href="https://adilet.zan.kz/rus/docs/K1500000414" referrerpolicy="no-referrer">П. 1 ст. 113 ТК РК</a></p>
+        <p class="field-error" id="calc-due-error" data-error-for="due" hidden></p>
+      </div>
+      <label class="check status-field"><input id="calc-unpaid" data-field="unpaid" type="checkbox"><span>Не выплачена до настоящего времени</span></label>
+      <div class="field" data-actual>
+        <label for="calc-paid">Фактическая дата выплаты</label>
+        <input id="calc-paid" data-field="paid" type="date" required aria-describedby="calc-paid-error">
+        <p class="field-error" id="calc-paid-error" data-error-for="paid" hidden></p>
+      </div>
+      <p class="error-summary" data-error-summary tabindex="-1" role="alert" hidden></p>
+        <div class="actions"><button class="button" type="submit">Рассчитать</button> <button class="button secondary" id="reset-calculator" type="button">Начать заново</button></div>
+        <p class="hint">Проверенные ставки в таблице сайта: с 01.01.2021 по <time datetime="2026-11-15">15.11.2026</time>. <a class="source-link" href="https://nationalbank.kz/ru/news/grafik-prinyatiya-resheniy-po-bazovoy-stavke/rubrics/2365" referrerpolicy="no-referrer">Ставки Национального Банка РК</a></p>
+      </form>
+      <div>
+        <div class="card result-empty" id="results-empty">
+          <h2>Результат расчёта</h2><p class="muted">После расчёта здесь появятся дни задержки, ставка и сумма пени.</p>
         </div>
+        <section class="card results" id="results" hidden aria-labelledby="result-heading">
+          <div class="result-top"><h2 id="result-heading" tabindex="-1"><span id="result-kind">Пеня за задержку</span></h2><p class="result-amount" id="result-penalty"></p></div>
+          <div class="result-body">
+            <dl class="result-rows">
+              <div><dt id="result-amount-label">Задолженность по зарплате</dt><dd id="result-amount"></dd></div>
+              <div><dt>Дни задержки</dt><dd id="result-days"></dd></div>
+              <div><dt>Базовая ставка <details class="tooltip"><summary aria-label="Что такое базовая ставка?">?</summary><div class="tooltip-body" id="rate-tooltip">Базовая ставка — годовой показатель Национального Банка. При расчёте пени берётся ставка на день фактической выплаты. Для открытой задолженности используется ставка на дату предварительной оценки.</div></details></dt><dd id="result-rate"></dd></div>
+              <div><dt>Зарплата + пеня</dt><dd id="result-total"></dd></div>
+              <div><dt id="result-due-label">К выплате</dt><dd id="result-outstanding"></dd></div>
+            </dl>
+            <p class="hint" id="result-rate-date"></p>
+            <h3 class="formula-heading">Формула <details class="tooltip"><summary aria-label="Как читать формулу?">?</summary><div class="tooltip-body" id="formula-tooltip">Ставка подставляется в процентах. Коэффициент 1,25 предусмотрен п. 3 ст. 113 ТК РК. Деление на 365 переводит годовую ставку в дневную по примеру инспекции труда.</div></details></h3>
+            <p class="formula">Сумма × базовая ставка × 1,25 ÷ 365 × дни</p>
+            <p class="formula" id="formula-line"></p>
+            <p class="hint"><a class="source-link" href="https://adilet.zan.kz/rus/docs/K1500000414" referrerpolicy="no-referrer">П. 3 ст. 113 ТК РК · «Әділет»</a> · <a class="source-link" href="https://www.gov.kz/org/trud-zhambyl/press/news/details/1288828?lang=ru" referrerpolicy="no-referrer">Пример расчёта инспекции труда</a></p>
+            <div class="actions"><button class="button secondary" id="toggle-breakdown" type="button" aria-expanded="false" aria-controls="breakdown">Показать подробный расчёт</button></div>
+          <section id="breakdown" class="breakdown" hidden aria-labelledby="breakdown-title">
+            <h3 id="breakdown-title">Как рассчитана пеня</h3>
+            <ol class="numbered">
+              <li><strong>Сумма задолженности за период задержки</strong><p id="detail-amount"></p></li>
+              <li><strong>Установленный срок выплаты</strong><p id="detail-due"></p></li>
+              <li><strong>Период задержки</strong><p id="detail-period"></p></li>
+              <li><strong>Применяемая ставка</strong><p id="detail-rate"></p></li>
+              <li><strong>Подстановка значений в формулу</strong><p id="detail-equation"></p></li>
+              <li><strong>Размер пени</strong><p id="detail-penalty"></p></li>
+              <li><strong>Итоговая сумма к выплате</strong><p id="detail-total"></p></li>
+            </ol>
+          </section>
+            <div class="actions"><a class="button secondary" href="guide.html#statement">Создать заявление</a></div>
+          </div>
+        </section>
       </div>
     </div>
-  </div>
-
-
-  <!-- ==================== JAVASCRIPT ==================== -->
+    <aside class="note" aria-label="О точности расчёта"><p>Расчёт носит информационный характер. Итоговая сумма зависит от обстоятельств конкретной ситуации и актуальной редакции законодательства Республики Казахстан.</p><p>При открытой задержке сумма предварительная. Итог рассчитывается по ставке на день фактической выплаты.</p></aside>
+    <noscript><p class="note">Для расчёта включите JavaScript в браузере.</p></noscript>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <span>Учебный юридический проект · Республика Казахстан</span>
+      <span>Материалы носят информационный характер.</span>
+      <span>Сайт создан с помощью ИИ.</span>
+    </div>
+  </footer>
   <script>
-    // Global calculation state
-    let globalCalcState = {
-      debt: 0,
-      days: 0,
-      penalty: 0,
-      total: 0,
-      rate: 14.25,
-      dateDue: '',
-      dateActual: ''
-    };
+const rootElement = document.documentElement;
+const themeButton = document.getElementById('theme-toggle');
+const themeText = document.getElementById('theme-text');
+const menu = document.getElementById('navigation');
+const menuButton = document.getElementById('menu-toggle');
+const compact = window.matchMedia('(max-width: 790px)');
+const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+const pageLinks = Array.from(document.querySelectorAll('a[href]'))
+  .map(link => [link, link.getAttribute('href')])
+  .filter(([, href]) => /^(index|calculator|law|guide)\.html(?:#|$)/.test(href));
 
-    // DOMContentLoaded Initialization
-    document.addEventListener('DOMContentLoaded', () => {
-      // Initialize Lucide Icons safely
-      if (window.lucide) {
-        lucide.createIcons();
-      }
+const pageUrl = new URL(window.location.href);
+const requestedTheme = pageUrl.searchParams.get('theme');
+let explicitTheme = ['light', 'dark'].includes(requestedTheme) ? requestedTheme : null;
 
-      // Auto-fill dates
-      const today = new Date();
-      const fourteenDaysAgo = new Date();
-      fourteenDaysAgo.setDate(today.getDate() - 14);
+function applyTheme() {
+  const theme = explicitTheme ?? (systemDark.matches ? 'dark' : 'light');
+  rootElement.dataset.theme = theme;
+  themeText.textContent = theme === 'dark' ? 'Тёмная' : 'Светлая';
+  themeButton.setAttribute('aria-label', theme === 'dark' ? 'Тема оформления. Переключить на светлую' : 'Тема оформления. Переключить на тёмную');
+  for (const [link, href] of pageLinks) {
+    const [path, fragment] = href.split('#');
+    const query = explicitTheme ? `?theme=${explicitTheme}` : '';
+    link.setAttribute('href', `${path}${query}${fragment ? '#' + fragment : ''}`);
+  }
+}
 
-      const formatDate = (date) => date.toISOString().split('T')[0];
+themeButton.addEventListener('click', () => {
+  explicitTheme = rootElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  if (window.location.protocol !== 'file:') {
+    pageUrl.searchParams.set('theme', explicitTheme);
+    window.history.replaceState(null, '', pageUrl);
+  }
+  applyTheme();
+});
+systemDark.addEventListener('change', applyTheme);
+applyTheme();
 
-      document.getElementById('date-due').value = formatDate(fourteenDaysAgo);
-      document.getElementById('date-actual').value = formatDate(today);
-      document.getElementById('debt-amount').value = 250000;
+function setMenu(open) {
+  menu.hidden = compact.matches && !open;
+  menuButton.setAttribute('aria-expanded', String(compact.matches && open));
+}
 
-      // Initial penalty calculation
-      calculatePenalty();
-    });
+menuButton.addEventListener('click', () => setMenu(menu.hidden));
+compact.addEventListener('change', () => setMenu(false));
+menu.addEventListener('click', event => {
+  if (event.target.closest('a')) setMenu(false);
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
+    setMenu(false);
+    menuButton.focus();
+  }
+});
+document.addEventListener('click', event => {
+  if (!menu.contains(event.target) && !menuButton.contains(event.target)) setMenu(false);
+});
+rootElement.dataset.ui = 'ready';
+document.querySelector('.header-controls').hidden = false;
+setMenu(false);
 
-    // Tab Switching Logic
-    function switchTab(tabId) {
-      // Hide all tabs using Tailwind 'hidden' class
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
 
-      // Reset desktop tab button styling
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('bg-brand-50', 'text-brand-700', 'shadow-sm', 'border', 'border-brand-200/60');
-        btn.classList.add('text-slate-600');
-      });
+// Даты начала действия ставок из таблиц Национального Банка Казахстана.
+// При обновлении добавьте изменения по порядку и перенесите verifiedThrough
+// на последнюю дату, на которую проверена таблица. Значения: сотые доли процента.
+const rateTable = {
+  verifiedFrom: '2021-01-01',
+  verifiedThrough: '2026-11-15',
+  changes: [
+    ['2021-01-01', 900], // Переходящая ставка с 2020 года.
+    ['2021-07-27', 925],
+    ['2021-09-14', 950],
+    ['2021-10-26', 975],
+    ['2022-01-25', 1025],
+    ['2022-02-24', 1350],
+    ['2022-04-26', 1400],
+    ['2022-07-26', 1450],
+    ['2022-10-27', 1600],
+    ['2022-12-06', 1675],
+    ['2023-08-28', 1650],
+    ['2023-10-09', 1600],
+    ['2023-11-27', 1575],
+    ['2024-01-22', 1525],
+    ['2024-02-26', 1475],
+    ['2024-06-03', 1450],
+    ['2024-07-15', 1425],
+    ['2024-12-02', 1525],
+    ['2025-03-11', 1650],
+    ['2025-10-13', 1800],
+    ['2026-06-08', 1700],
+    ['2026-07-27', 1675],
+    ['2026-09-07', 1625],
+    ['2026-10-27', 1575]
+  ]
+};
 
-      // Reset mobile tab button styling
-      document.querySelectorAll('.mobile-tab-btn').forEach(btn => {
-        btn.classList.remove('bg-brand-50', 'text-brand-700', 'border', 'border-brand-200/60');
-        btn.classList.add('text-slate-700');
-      });
 
-      // Show targeted tab
-      const targetTab = document.getElementById(`tab-${tabId}`);
-      if (targetTab) {
-        targetTab.classList.remove('hidden');
-      }
+const calendar = new Intl.DateTimeFormat('en-CA', {
+  timeZone: 'Asia/Qyzylorda', year: 'numeric', month: '2-digit', day: '2-digit'
+});
+const integer = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 0 });
+const percent = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 4 });
+const millisecondsInDay = 86_400_000;
+const rateCoefficientHundredths = 125n;
+const daysInAnnualCalculation = 365n;
+const penaltyDivisor = 100n * 10_000n * daysInAnnualCalculation;
 
-      // Style active desktop button
-      const activeBtn = document.getElementById(`tab-btn-${tabId}`);
-      if (activeBtn) {
-        activeBtn.classList.add('bg-brand-50', 'text-brand-700', 'shadow-sm', 'border', 'border-brand-200/60');
-        activeBtn.classList.remove('text-slate-600');
-      }
+function todayInKazakhstan() {
+  const parts = Object.fromEntries(calendar.formatToParts(new Date()).map(({type, value}) => [type, value]));
+  return `${parts.year}-${parts.month}-${parts.day}`;
+}
 
-      // Style active mobile button
-      const activeMobileBtn = document.getElementById(`mobile-tab-btn-${tabId}`);
-      if (activeMobileBtn) {
-        activeMobileBtn.classList.add('bg-brand-50', 'text-brand-700', 'border', 'border-brand-200/60');
-        activeMobileBtn.classList.remove('text-slate-700');
-      }
+function calendarDay(iso) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(iso) || iso.startsWith('0000-')) return NaN;
+  const instant = new Date(`${iso}T00:00:00.000Z`);
+  if (!Number.isFinite(instant.getTime()) || instant.toISOString().slice(0, 10) !== iso) return NaN;
+  return instant.getTime() / millisecondsInDay;
+}
 
-      // Close mobile menu
-      document.getElementById('mobile-menu').classList.add('hidden');
+function dateLabel(iso) {
+  return iso.split('-').reverse().join('.');
+}
 
-      // Scroll to top
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+function nextCalendarDate(day) {
+  return new Date((day + 1) * millisecondsInDay).toISOString().slice(0, 10);
+}
+
+function money(tiyn) {
+  return `${integer.format(tiyn / 100n)},${String(tiyn % 100n).padStart(2, '0')} ₸`;
+}
+
+function readAmount(text) {
+  const trimmed = text.trim();
+  if (!trimmed) return { error: 'Введите сумму зарплаты в тенге.' };
+  if (/^[-−]/.test(trimmed)) return { error: 'Сумма зарплаты не может быть отрицательной.' };
+  if (!/^(?:\d+|\d{1,3}(?:[ \u00a0\u202f]\d{3})+)(?:[,.]\d{1,2})?$/.test(trimmed)) {
+    return { error: 'Введите сумму цифрами. После запятой можно указать до двух знаков.' };
+  }
+  const [whole, fraction = ''] = trimmed.replace(/[ \u00a0\u202f]/g, '').split(/[,.]/);
+  const tiyn = BigInt(whole) * 100n + BigInt(fraction.padEnd(2, '0'));
+  if (tiyn === 0n) return { error: 'Введите сумму больше нуля.' };
+  return { tiyn };
+}
+
+function calculatePenalty({ amount, due, paid, unpaid }, today = todayInKazakhstan()) {
+  const parsedAmount = readAmount(amount);
+  const end = unpaid ? today : paid;
+  const dueDay = calendarDay(due);
+  const endDay = calendarDay(end);
+  const errors = {};
+
+  if (parsedAmount.error) errors.amount = parsedAmount.error;
+  if (!Number.isFinite(dueDay)) errors.due = 'Укажите установленную дату выплаты.';
+  else if (due > today) errors.due = 'Установленная дата выплаты ещё не наступила.';
+  if (!unpaid) {
+    if (!Number.isFinite(endDay)) errors.paid = 'Укажите фактическую дату выплаты или отметьте, что зарплата ещё не выплачена.';
+    else if (paid > today) errors.paid = 'Фактическая дата выплаты не может быть в будущем.';
+    else if (Number.isFinite(dueDay) && endDay < dueDay) errors.paid = 'Фактическая дата выплаты не может быть раньше установленного срока.';
+  }
+  if (Object.keys(errors).length) return { errors };
+
+  const days = endDay - dueDay;
+  const { tiyn } = parsedAmount;
+  if (!days) {
+    return { due, end, unpaid, days, amount: tiyn, penalty: 0n, total: tiyn, start: null, rate: null, annualRate: null };
+  }
+
+  if (end < rateTable.verifiedFrom || end > rateTable.verifiedThrough) {
+    return { message: `На ${dateLabel(end)} в этой версии нет подтверждённой ставки. Сверьте её по данным Национального Банка. Таблица сайта охватывает даты с ${dateLabel(rateTable.verifiedFrom)} по ${dateLabel(rateTable.verifiedThrough)}.` };
+  }
+
+  const [, rateBasisPoints] = rateTable.changes.findLast(([effective]) => effective <= end);
+  const numerator = tiyn * rateCoefficientHundredths * BigInt(rateBasisPoints) * BigInt(days);
+  const penalty = (numerator + penaltyDivisor / 2n) / penaltyDivisor;
+  return {
+    due, end, unpaid, days, amount: tiyn, penalty, total: tiyn + penalty,
+    start: nextCalendarDate(dueDay),
+    rate: percent.format(rateBasisPoints / 100),
+    annualRate: percent.format(rateBasisPoints * Number(rateCoefficientHundredths) / 10_000)
+  };
+}
+
+function readCase(form) {
+  return {
+    amount: form.querySelector('[data-field="amount"]').value,
+    due: form.querySelector('[data-field="due"]').value,
+    paid: form.querySelector('[data-field="paid"]').value,
+    unpaid: form.querySelector('[data-field="unpaid"]').checked
+  };
+}
+
+function connectCaseForm(form, onSubmit, onChange) {
+  const due = form.querySelector('[data-field="due"]');
+  const paid = form.querySelector('[data-field="paid"]');
+  const unpaid = form.querySelector('[data-field="unpaid"]');
+  const summary = form.querySelector('[data-error-summary]');
+  const errors = form.querySelectorAll('[data-error-for]');
+  const paidWrap = paid.closest('[data-actual]');
+
+  function clearErrors() {
+    summary.hidden = true;
+    summary.textContent = '';
+    for (const line of errors) {
+      line.hidden = true;
+      line.textContent = '';
     }
+    for (const field of form.querySelectorAll('[aria-invalid]')) field.removeAttribute('aria-invalid');
+  }
 
-    // Toggle Mobile Menu
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('hidden');
+  function syncDates() {
+    const today = todayInKazakhstan();
+    due.max = today;
+    paid.max = today;
+    paid.disabled = unpaid.checked;
+    paid.required = !unpaid.checked;
+    paidWrap.hidden = unpaid.checked;
+  }
+
+  function changed() {
+    clearErrors();
+    syncDates();
+    onChange();
+  }
+
+  form.addEventListener('input', changed);
+  form.addEventListener('reset', () => queueMicrotask(changed));
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    clearErrors();
+    syncDates();
+    const result = calculatePenalty(readCase(form));
+    if (!result.errors && !result.message) {
+      onSubmit(result);
+      return;
     }
-
-    // Calculation Function
-    function calculatePenalty() {
-      const debtInput = parseFloat(document.getElementById('debt-amount').value) || 0;
-      const rateInput = parseFloat(document.getElementById('rate-nb').value) || 0;
-      const dateDueInput = document.getElementById('date-due').value;
-      const dateActualInput = document.getElementById('date-actual').value;
-
-      const resDays = document.getElementById('res-days');
-      const resPenalty = document.getElementById('res-penalty');
-      const resTotal = document.getElementById('res-total');
-      const btnClaim = document.getElementById('btn-generate-claim');
-      const noDelayMsg = document.getElementById('no-delay-msg');
-
-      const stepRateAnnual = document.getElementById('step-rate-annual');
-      const stepRateDaily = document.getElementById('step-rate-daily');
-      const stepPenaltyDaily = document.getElementById('step-penalty-daily');
-      const stepPenaltyTotal = document.getElementById('step-penalty-total');
-
-      if (!dateDueInput || !dateActualInput || debtInput <= 0) {
-        resDays.textContent = '0 дней';
-        resPenalty.textContent = '0 ₸';
-        resTotal.textContent = '0 ₸';
-        stepPenaltyDaily.textContent = '0 ₸';
-        stepPenaltyTotal.textContent = '0 ₸';
-        btnClaim.disabled = true;
-        noDelayMsg.classList.add('hidden');
-        return;
+    onChange();
+    if (result.errors && errors.length) {
+      for (const [key, message] of Object.entries(result.errors)) {
+        const field = form.querySelector(`[data-field="${key}"]`);
+        const line = form.querySelector(`[data-error-for="${key}"]`);
+        field.setAttribute('aria-invalid', 'true');
+        line.textContent = message;
+        line.hidden = false;
       }
+      form.querySelector('[aria-invalid="true"]').focus();
+    } else {
+      summary.textContent = result.message ?? Object.values(result.errors)[0];
+      summary.hidden = false;
+      summary.focus();
+    }
+  });
+  syncDates();
+}
 
-      const due = new Date(dateDueInput);
-      const actual = new Date(dateActualInput);
 
-      // Exact millisecond calculation rounded UP with Math.ceil
-      const diffTime = actual.getTime() - due.getTime();
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+const calculatorForm = document.querySelector('#calculator-form');
+const resultsPanel = document.querySelector('#results');
+const resultPlaceholder = document.querySelector('#results-empty');
 
-      if (diffDays <= 0) {
-        resDays.textContent = '0 дней';
-        resPenalty.textContent = '0 ₸';
-        resTotal.textContent = `${debtInput.toLocaleString('ru-RU')} ₸`;
-        stepPenaltyDaily.textContent = '0 ₸';
-        stepPenaltyTotal.textContent = '0 ₸';
-        btnClaim.disabled = true;
-        noDelayMsg.classList.remove('hidden');
-        return;
+function showText(key, value) {
+  document.getElementById(key).textContent = value;
+}
+
+function updateCalculatorProgress() {
+  const progress = document.querySelector('#calculator-progress');
+  if (!progress) return;
+  const { amount, due, paid, unpaid } = readCase(calculatorForm);
+  const filled = [amount.trim(), due, unpaid || paid].filter(Boolean).length;
+  progress.value = filled;
+  showText('calculator-progress-label', `Заполнено ${filled} из 3 полей`);
+}
+
+function hideResult() {
+  resultsPanel.hidden = true;
+  resultPlaceholder.hidden = false;
+  updateCalculatorProgress();
+}
+
+function renderResult(result) {
+  const { unpaid, due, end, start, amount, days, rate, annualRate, penalty, total } = result;
+  const equation = days
+    ? `${money(amount)} × ${rate}% × 1,25 ÷ ${daysInAnnualCalculation} × ${days} = ${money(penalty)}`
+    : `Дней задержки: 0. Пеня: ${money(penalty)}.`;
+  const dateInfo = unpaid ? `на ${dateLabel(end)}, предварительно` : `на дату выплаты ${dateLabel(end)}`;
+  const period = start ? `с ${dateLabel(start)} по ${dateLabel(end)} включительно` : 'просрочки по указанным датам нет';
+
+  showText('result-kind', unpaid ? `Предварительная пеня на ${dateLabel(end)}` : 'Пеня за задержку');
+  showText('result-penalty', money(penalty));
+  showText('result-amount-label', unpaid ? 'Задолженность по зарплате' : 'Сумма задержанной зарплаты');
+  showText('result-amount', money(amount));
+  showText('result-days', `${days} календ. дн.`);
+  showText('result-rate', days ? `${rate}% годовых` : 'Не применяется');
+  showText('result-rate-date', days ? `Базовая ставка ${dateInfo}.` : 'При нулевой задержке ставка в расчёте не участвует.');
+  showText('result-total', money(total));
+  showText('result-due-label', unpaid ? 'К выплате на дату расчёта' : 'Пеня по указанным данным');
+  showText('result-outstanding', money(unpaid ? total : penalty));
+  showText('formula-line', equation);
+
+  if (document.getElementById('breakdown')) {
+    showText('detail-amount', money(amount));
+    showText('detail-due', dateLabel(due));
+    showText('detail-period', `${period}. Календарных дней задержки: ${days}.`);
+    showText('detail-rate', days ? `${rate}% ${dateInfo}. С коэффициентом 1,25 годовой показатель составляет ${annualRate}%.` : 'Ставка не применяется, поскольку просрочки нет.');
+    showText('detail-equation', equation);
+    showText('detail-penalty', money(penalty));
+    showText('detail-total', unpaid ? `${money(amount)} + ${money(penalty)} = ${money(total)} на дату расчёта.` : `Зарплата и пеня вместе составляют ${money(total)}. Зарплата указана как выплаченная. Расчётная пеня составляет ${money(penalty)}.`);
+    setBreakdown(false);
+  }
+
+  resultPlaceholder.hidden = true;
+  resultsPanel.hidden = false;
+  resultsPanel.classList.remove('arrive');
+  void resultsPanel.offsetWidth;
+  resultsPanel.classList.add('arrive');
+  document.getElementById('result-heading').focus();
+}
+
+const detailsButton = document.querySelector('#toggle-breakdown');
+function setBreakdown(open) {
+  const content = document.getElementById('breakdown');
+  content.hidden = !open;
+  detailsButton.setAttribute('aria-expanded', String(open));
+  detailsButton.textContent = open ? 'Скрыть подробный расчёт' : 'Показать подробный расчёт';
+}
+if (detailsButton) {
+  detailsButton.addEventListener('click', () => setBreakdown(detailsButton.getAttribute('aria-expanded') === 'false'));
+}
+
+connectCaseForm(calculatorForm, renderResult, hideResult);
+updateCalculatorProgress();
+document.getElementById('reset-calculator')?.addEventListener('click', () => {
+  calculatorForm.reset();
+  calculatorForm.querySelector('[data-field="amount"]').focus();
+});
+  </script>
+</body>
+</html>
+
+===== law.html =====
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; form-action 'none'; base-uri 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>Правовая база · Пеня за задержку зарплаты в РК</title>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f5f6f8;
+  --surface: #fff;
+  --soft: #eef3f8;
+  --ink: #142338;
+  --muted: #46566a;
+  --line: #d5dee7;
+  --link: #164e79;
+  --primary: #173958;
+  --on-primary: #fff;
+  --focus: #316c98;
+  --danger: #a02032;
+  --danger-bg: #fff3f4;
+  --shadow: 0 18px 42px #172b4310;
+  font-family: Inter, 'Segoe UI', Arial, sans-serif;
+  font-size: 100%;
+  line-height: 1.55;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { min-width: 280px; }
+body { margin: 0; background: var(--bg); color: var(--ink); min-height: 100vh; display: flex; flex-direction: column; }
+a { color: var(--link); text-underline-offset: .2em; }
+button, input, textarea { font: inherit; color: inherit; }
+button, summary, input[type='checkbox'] { cursor: pointer; }
+button:disabled, input:disabled { cursor: default; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+h1, h2, h3 { line-height: 1.16; letter-spacing: -.026em; margin: 0; }
+h1 { font-size: clamp(2.15rem, 5vw, 3.7rem); }
+h2 { font-size: clamp(1.35rem, 3vw, 2rem); }
+h3 { font-size: 1.1rem; }
+p { margin: .65rem 0 0; }
+.wrap { width: min(1120px, calc(100% - 3rem)); margin-inline: auto; }
+.skip { position: absolute; top: .5rem; left: .5rem; z-index: 10; transform: translateY(-150%); background: var(--surface); padding: .65rem 1rem; }
+.skip:focus { transform: translateY(0); }
+.site-header { background: var(--surface); border-bottom: 1px solid var(--line); }
+.masthead { display: flex; justify-content: space-between; align-items: center; gap: 1.2rem; min-height: 76px; padding-block: .65rem; }
+.brand { display: inline-flex; align-items: center; gap: .65rem; color: var(--ink); text-decoration: none; font-weight: 750; white-space: nowrap; }
+.brand-mark { width: 37px; height: 37px; display: grid; place-items: center; color: var(--on-primary); background: var(--primary); border-radius: 9px; font-size: 1.18rem; }
+.site-nav { display: flex; flex-wrap: wrap; gap: .25rem; align-items: center; }
+.site-nav a { color: var(--muted); padding: .58rem .75rem; border-radius: 8px; text-decoration: none; font-size: .9rem; font-weight: 600; }
+.site-nav a:hover, .site-nav a[aria-current='page'] { color: var(--ink); background: var(--soft); }
+main { flex: 1; padding-block: clamp(2.25rem, 6vw, 5rem); }
+.site-footer { padding-block: 1.25rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .86rem; }
+.footer-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .45rem 1.2rem; }
+.muted, .lead, .hint { color: var(--muted); }
+.lead { font-size: clamp(1rem, 2vw, 1.13rem); max-width: 65ch; margin-top: 1rem; }
+.hint { font-size: .87rem; }
+.hint a { overflow-wrap: anywhere; }
+.page-head, .content-section { margin-bottom: 2rem; }
+.content-section:last-child { margin-bottom: 0; }
+.content-section > h2 { margin-bottom: 1rem; }
+.hero { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); align-items: center; gap: clamp(1.6rem, 6vw, 5.75rem); padding-block: .6rem 1rem; }
+.hero > *, .form-layout > *, .guide-layout > * { min-width: 0; }
+.actions { display: flex; flex-wrap: wrap; gap: .7rem; align-items: center; margin-top: 1.5rem; }
+.button { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; min-height: 44px; padding: .65rem 1rem; border: 1px solid var(--primary); border-radius: 8px; background: var(--primary); color: var(--on-primary); text-decoration: none; font-weight: 650; line-height: 1.25; text-align: center; }
+.button:hover { filter: brightness(1.12); }
+.button.secondary { border-color: var(--line); color: var(--ink); background: var(--surface); }
+.button.secondary:hover { border-color: var(--focus); background: var(--soft); filter: none; }
+.button:disabled { opacity: .58; }
+.card, .hero-aside, .note { background: var(--surface); border: 1px solid var(--line); border-radius: 13px; padding: clamp(1rem, 3vw, 1.55rem); }
+.card p, .note p { max-width: 68ch; }
+.hero-aside { background: var(--primary); color: var(--on-primary); padding: clamp(1.3rem, 4vw, 2rem); }
+.hero-aside ul { list-style: none; padding: 0; margin: .85rem 0 0; }
+.hero-aside li { display: flex; align-items: center; gap: .8rem; padding: .65rem 0; border-top: 1px solid #ffffff38; }
+.hero-aside p { color: inherit; }
+.note { background: var(--soft); border-inline-start: 4px solid var(--focus); }
+.note p:first-child, .card p:first-child { margin-top: 0; }
+.note h2 { font-size: 1.22rem; }
+.grid-three, .law-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, minmax(0,1fr)); }
+.law-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.info-stack { display: grid; gap: 1rem; }
+.steps-home { list-style: none; padding: 0; margin: 0; }
+.step-label { display: block; margin-bottom: .7rem; color: var(--link); font-weight: 750; }
+.interactive .button, .interactive .site-nav a, .interactive .steps-home .card { transition: background .2s, color .2s, border-color .2s, box-shadow .2s, transform .2s; }
+@media (hover: hover) { .interactive .steps-home .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); } }
+.form-layout, .guide-layout { display: grid; gap: 1.25rem; align-items: start; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.guide-layout { grid-template-columns: minmax(0, 1.7fr) minmax(0, .9fr); }
+.form-layout h2, .guide-layout h2 { margin-bottom: .35rem; }
+.field { margin-top: 1.05rem; }
+.field > label, .label { display: block; font-weight: 650; margin-bottom: .35rem; }
+input:not([type='checkbox']), textarea { width: 100%; min-width: 0; min-height: 46px; border: 1px solid var(--line); border-radius: 8px; padding: .62rem .75rem; background: var(--surface); }
+input:not([type='checkbox']):hover, textarea:hover { border-color: var(--focus); }
+input[aria-invalid='true'] { border-color: var(--danger); }
+input::placeholder { color: var(--muted); opacity: 1; }
+input[type='checkbox'] { accent-color: var(--primary); width: 1.13rem; height: 1.13rem; flex: none; margin: .15rem 0 0; }
+.check { display: flex; gap: .65rem; align-items: flex-start; }
+.check span { min-width: 0; }
+.status-field { margin-top: .8rem; }
+.field-error { margin: .35rem 0 0; color: var(--danger); font-size: .88rem; }
+.error-summary { color: var(--danger); background: var(--danger-bg); border-radius: 8px; padding: .7rem .85rem; margin-top: 1rem; }
+.results { padding: 0; overflow: hidden; }
+.result-body { padding: clamp(1rem, 3vw, 1.55rem); }
+.result-top { padding: clamp(1rem, 3vw, 1.55rem); background: var(--soft); border-bottom: 1px solid var(--line); }
+.result-amount { font-size: clamp(1.75rem, 4vw, 2.65rem); font-weight: 750; margin: .15rem 0 0; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.result-rows { margin: 0 0 1rem; }
+.result-rows div { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: .6rem; padding: .63rem 0; border-bottom: 1px solid var(--line); }
+.result-rows dd { margin: 0; text-align: right; font-weight: 700; overflow-wrap: anywhere; }
+.formula { padding: .65rem .8rem; background: var(--soft); border-radius: 6px; overflow-wrap: anywhere; }
+.numbered { padding-left: 1.4rem; margin: 1rem 0 0; }
+.numbered li { padding-inline-start: .2rem; margin-bottom: .7rem; }
+.numbered li p { margin-top: .15rem; }
+.source-link { display: inline-block; max-width: 100%; overflow-wrap: anywhere; font-weight: 650; }
+.sources { padding-left: 1.15rem; margin-block: .6rem 0; }
+.sources li + li { margin-top: .55rem; }
+.law-card { display: flex; flex-direction: column; gap: .75rem; align-items: flex-start; }
+.law-card p { margin-top: 0; }
+.law-card .citation-line { margin-top: auto; }
+.citation-line small { display: block; color: var(--muted); }
+.guide-step, .faq details { background: var(--surface); border: 1px solid var(--line); border-radius: 11px; }
+.guide-step + .guide-step, .faq details + details { margin-top: .65rem; }
+.guide-step summary, .faq summary { padding: .9rem 1rem; font-weight: 650; }
+.guide-step[open] summary, .faq details[open] summary { border-bottom: 1px solid var(--line); }
+.detail-body { padding: .85rem 1rem 1rem; }
+.detail-body > :first-child { margin-top: 0; }
+.detail-body .check { margin-top: .9rem; }
+.guide-docs { list-style: none; padding: 0; margin: .85rem 0 0; }
+.guide-docs li + li { margin-top: .75rem; }
+progress { display: block; width: 100%; height: .6rem; margin-top: .5rem; border: 0; border-radius: 999px; overflow: hidden; background: var(--soft); color: var(--primary); }
+progress::-webkit-progress-bar { background: var(--soft); }
+progress::-webkit-progress-value { background: var(--primary); }
+progress::-moz-progress-bar { background: var(--primary); }
+.progress-box { margin-bottom: 1rem; }
+.statement-text { margin-top: .7rem; min-height: 22rem; resize: vertical; line-height: 1.6; }
+.copy-status { min-height: 1.3em; }
+
+@media (max-width: 790px) {
+  .masthead { flex-wrap: wrap; gap: .5rem 1rem; }
+  .wrap { width: calc(100% - 2rem); }
+  .hero { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .form-layout, .guide-layout, .grid-three, .law-grid { grid-template-columns: 1fr; }
+  .site-nav a { font-size: .82rem; padding: .55rem .49rem; }
+  .brand { font-size: .94rem; }
+  .button { min-height: 46px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+:root {
+  --bg: #f6f5f1;
+  --surface: #fffefa;
+  --soft: #edf1f5;
+  --ink: #142439;
+  --muted: #47576b;
+  --line: #d4dce3;
+  --link: #194e75;
+  --primary: #183855;
+  --focus: #4b7193;
+  --navy: #142b42;
+  --navy-deep: #102236;
+  --accent: #e7ce9e;
+  --accent-line: #9f7949;
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #111821;
+  --surface: #1a2531;
+  --soft: #222f3d;
+  --ink: #edf2f7;
+  --muted: #bcc9d7;
+  --line: #425366;
+  --link: #b6d9f7;
+  --primary: #bfdbef;
+  --on-primary: #12253a;
+  --focus: #aad1f0;
+  --danger: #ffbbc2;
+  --danger-bg: #462932;
+  --shadow: 0 16px 40px #0004;
+  --accent-line: #cca26f;
+}
+.site-header { position: relative; z-index: 5; }
+.masthead { gap: .65rem 1.15rem; }
+.brand { margin-right: auto; }
+.brand-mark { background: var(--navy); color: #fcf5e6; border: 1px solid #a78a60; border-radius: 8px; }
+.header-controls { display: flex; align-items: center; gap: .45rem; order: 2; }
+.header-button { display: inline-flex; align-items: center; justify-content: center; gap: .45rem; min-height: 42px; border: 1px solid var(--line); border-radius: 8px; padding: .45rem .63rem; background: var(--surface); font-size: .82rem; font-weight: 650; white-space: nowrap; }
+.header-button:hover { background: var(--soft); }
+.menu-toggle { display: none; }
+.site-nav a[aria-current='page'] { box-shadow: inset 0 -2px 0 var(--accent-line); }
+h1 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 500; letter-spacing: -.046em; }
+.hero h1 { font-size: clamp(2.65rem, 5.25vw, 4.35rem); line-height: 1.02; max-width: 16ch; }
+.hero .lead { max-width: 53ch; }
+.hero { gap: clamp(1.6rem, 5vw, 4.5rem); padding-top: 0; margin-bottom: clamp(2.8rem, 6vw, 4.5rem); }
+.hero-aside { background: linear-gradient(140deg, var(--navy), var(--navy-deep)); color: #f5f7fb; border-color: #2a435f; border-radius: 16px; box-shadow: var(--shadow); padding: clamp(1.25rem, 4vw, 2.3rem); }
+.hero-aside h2 { color: #fffaf1; }
+.hero-aside ul { margin-top: 1.25rem; }
+.hero-aside li { padding: .9rem 0; line-height: 1.35; }
+.hero-aside li:last-child { padding-bottom: 0; }
+.hero-aside .icon { width: 2.15rem; height: 2.15rem; color: var(--accent); background: #ffffff0d; border: 1px solid #e7ce9e54; border-radius: 8px; }
+.steps-home .card { min-height: 146px; }
+.step-label { font-size: .84rem; margin-bottom: .8rem; }
+.page-head h1 { font-size: clamp(2.55rem, 5.5vw, 4.35rem); }
+.content-section { margin-bottom: clamp(1.55rem, 4vw, 2.55rem); }
+.card, .note { border-radius: 13px; }
+.note { border-inline-start-color: var(--accent-line); }
+.privacy h2 { display: flex; align-items: center; gap: .5rem; }
+.privacy .icon { color: var(--link); }
+.button, .header-button, .source-link { transition: background .2s, filter .2s, color .2s, border-color .2s; }
+.button:not(.secondary):hover { filter: brightness(.9); }
+.result-top { background: var(--navy); color: #fbf7f0; border-bottom: 3px solid var(--accent-line); }
+.result-top h2 { font-size: 1.15rem; }
+.result-amount { line-height: 1.2; margin-top: .45rem; }
+.result-empty { min-height: 11rem; background: var(--soft); border-style: dashed; }
+.results.arrive { animation: result-appear .27s cubic-bezier(.2,.7,.4,1) both; }
+@keyframes result-appear {
+  from { opacity: 0; transform: translateY(9px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.calc-progress { margin: 1rem 0 .55rem; font-size: .86rem; color: var(--muted); }
+.formula-heading, .breakdown { margin-top: 1rem; }
+.formula { font-variant-numeric: tabular-nums; }
+.source-link { border-radius: 4px; padding: .1em .25em; background: var(--soft); }
+.law-meta { color: var(--muted); }
+.law-meta strong { color: var(--link); }
+.tooltip { display: inline-block; position: relative; vertical-align: baseline; }
+.tooltip summary { display: inline-grid; place-items: center; width: 1.35rem; height: 1.35rem; list-style: none; border: 1px solid var(--line); border-radius: 100%; color: var(--link); background: var(--soft); font-size: .8rem; font-weight: 750; }
+.tooltip summary::-webkit-details-marker { display: none; }
+.tooltip-body { position: absolute; z-index: 4; inset: auto auto auto 0; width: min(16rem, 58vw); margin-top: .35rem; padding: .65rem; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); box-shadow: var(--shadow); color: var(--ink); font-size: .85rem; line-height: 1.4; font-weight: 400; letter-spacing: normal; }
+.faq details[open] .detail-body, .guide-step[open] .detail-body { animation: result-appear .19s ease-out; }
+.icon { display: inline-grid; place-items: center; width: 1.3rem; height: 1.3rem; flex: none; position: relative; }
+.icon::before, .icon::after { content: ''; position: absolute; box-sizing: border-box; }
+.icon-menu::before { width: .95rem; height: 2px; background: currentColor; box-shadow: 0 -.27rem currentColor, 0 .27rem currentColor; }
+.menu-toggle[aria-expanded='true'] .icon-menu::before { box-shadow: none; transform: rotate(45deg); }
+.menu-toggle[aria-expanded='true'] .icon-menu::after { width: .95rem; height: 2px; background: currentColor; transform: rotate(-45deg); }
+.icon-calendar::before { width: .98rem; height: .89rem; border: 1.5px solid; border-radius: 2px; }
+.icon-calendar::after { width: .86rem; height: 1.5px; top: calc(50% - .15rem); background: currentColor; }
+.icon-clock::before, .icon-theme::before { width: .98rem; height: .98rem; border: 1.5px solid; border-radius: 50%; }
+.icon-clock::after { width: .31rem; height: .29rem; top: calc(50% - .26rem); left: 50%; border-left: 1.5px solid; border-bottom: 1.5px solid; }
+.icon-theme::after { width: .42rem; height: .88rem; left: 50%; border-radius: 0 .55rem .55rem 0; background: currentColor; }
+.icon-lock::before { width: .8rem; height: .61rem; top: .53rem; border: 1.5px solid; border-radius: 2px; }
+.icon-lock::after { width: .46rem; height: .48rem; top: .17rem; border: 1.5px solid; border-bottom: 0; border-radius: 6px 6px 0 0; }
+.icon-money { font-weight: 750; }
+
+@media (max-width: 790px) {
+  .masthead { min-height: 66px; }
+  .header-controls { order: initial; }
+  .menu-toggle { display: inline-flex; }
+  .site-nav { flex: 1 0 100%; }
+  [data-ui='ready'] .site-nav { display: grid; grid-template-columns: 1fr; padding: .4rem .25rem .7rem; gap: .22rem; border-top: 1px solid var(--line); }
+  [data-ui='ready'] .site-nav a { font-size: .93rem; padding: .8rem; }
+  .hero h1 { max-width: 15ch; }
+  .hero-aside { width: 100%; }
+}
+@media (max-width: 440px) {
+  .masthead { gap: .45rem; }
+  .header-controls { gap: .3rem; }
+  .header-button { padding-inline: .52rem; }
+  .header-button:first-child .icon { display: none; }
+}
+@media (max-width: 380px) {
+  .brand { gap: .4rem; font-size: .88rem; }
+  .brand-mark { width: 30px; height: 30px; }
+  .masthead { gap: .5rem; }
+  .header-controls { gap: .27rem; }
+  .header-button { padding-inline: .38rem; }
+  .header-button .icon { display: none; }
+}
+  </style>
+</head>
+<body class="interactive">
+  <a class="skip" href="#main">К содержанию</a>
+  <header class="site-header">
+    <div class="wrap masthead">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">₸</span> Пеня за зарплату</a>
+      <div class="header-controls" hidden>
+        <button class="header-button" id="theme-toggle" type="button"><span class="icon icon-theme" aria-hidden="true"></span> <span id="theme-text">Светлая</span></button>
+        <button class="header-button menu-toggle" id="menu-toggle" type="button" aria-controls="navigation" aria-expanded="false"><span class="icon icon-menu" aria-hidden="true"></span> <span>Меню</span></button>
+      </div>
+      <nav class="site-nav" id="navigation" aria-label="Основное меню">
+        <a href="index.html">Главная</a>
+        <a href="calculator.html">Калькулятор пени</a>
+        <a href="law.html" aria-current="page">Правовая база</a>
+        <a href="guide.html">Инструкция</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap" id="main" tabindex="-1">
+    <header class="page-head"><h1>Правовая база</h1><p class="lead">Нормы о сроках выплаты зарплаты, праве работника и порядке начисления пени.</p></header>
+    <div class="law-grid content-section">
+      <article class="card law-card">
+        <h2>Срок выплаты зарплаты</h2>
+        <p class="law-meta"><strong>Статья 113, пункт 1</strong><br>Трудовой кодекс Республики Казахстан</p>
+        <p><strong>Что регулирует</strong><br>Периодичность и установленную дату выплаты.</p>
+        <p><strong>Простыми словами</strong><br>Зарплату платят минимум раз в месяц, не позднее 10-го числа следующего месяца. Конкретный день указывается трудовым или коллективным договором. Если он приходится на выходной или праздник, выплата производится накануне.</p>
+        <div class="citation-line"><a class="source-link" href="https://adilet.zan.kz/rus/docs/K1500000414" referrerpolicy="no-referrer">Официальный текст в «Әділет»</a><small>Дата проверки: <time datetime="2026-11-15">15.11.2026</time></small></div>
+      </article>
+      <article class="card law-card">
+        <h2>Обязанность работодателя</h2>
+        <p class="law-meta"><strong>Статья 23, пункт 2, подпункт 5)</strong><br>Трудовой кодекс Республики Казахстан</p>
+        <p><strong>Что регулирует</strong><br>Своевременную и полную выплату зарплаты и иных выплат.</p>
+        <p><strong>Простыми словами</strong><br>Работодатель обязан перечислять или выдавать предусмотренную зарплату и другие причитающиеся выплаты в срок и в полном объёме.</p>
+        <div class="citation-line"><a class="source-link" href="https://adilet.zan.kz/rus/docs/K1500000414" referrerpolicy="no-referrer">Официальный текст в «Әділет»</a><small>Дата проверки: <time datetime="2026-11-15">15.11.2026</time></small></div>
+      </article>
+      <article class="card law-card">
+        <h2>Задолженность и пеня</h2>
+        <p class="law-meta"><strong>Статья 113, пункт 3</strong><br>Трудовой кодекс Республики Казахстан</p>
+        <p><strong>Что регулирует</strong><br>Последствия несвоевременной или неполной выплаты и правила начисления пени.</p>
+        <p><strong>Простыми словами</strong><br>Работнику положены недоплаченная зарплата и пеня. Пеню считают за каждый календарный день со дня после срока выплаты по день погашения включительно. Применяют базовую ставку Нацбанка на день фактической выплаты с коэффициентом 1,25.</p>
+        <div class="citation-line"><a class="source-link" href="https://adilet.zan.kz/rus/docs/K1500000414" referrerpolicy="no-referrer">Официальный текст в «Әділет»</a><small>Дата проверки: <time datetime="2026-11-15">15.11.2026</time></small></div>
+      </article>
+      <article class="card law-card">
+        <h2>Право работника требовать выплату</h2>
+        <p class="law-meta"><strong>Статья 22, пункт 1, подпункты 2) и 5)</strong><br>Трудовой кодекс Республики Казахстан</p>
+        <p><strong>Что регулирует</strong><br>Право требовать исполнения условий договора и получать зарплату вовремя и полностью.</p>
+        <p><strong>Простыми словами</strong><br>Работник вправе требовать исполнения условий оплаты труда. Если зарплата задержана, в письменном заявлении можно потребовать причитающуюся сумму и пеню по статье 113.</p>
+        <div class="citation-line"><a class="source-link" href="https://adilet.zan.kz/rus/docs/K1500000414" referrerpolicy="no-referrer">Официальный текст в «Әділет»</a><small>Дата проверки: <time datetime="2026-11-15">15.11.2026</time></small></div>
+      </article>
+      <article class="card law-card">
+        <h2>Административная ответственность</h2>
+        <p class="law-meta"><strong>Статья 87, часть 1</strong><br>Кодекс Республики Казахстан об административных правонарушениях</p>
+        <p><strong>Что регулирует</strong><br>Ответственность за нарушение требований по оплате труда.</p>
+        <p><strong>Простыми словами</strong><br>Нарушение срока или полноты выплаты зарплаты, а также неначисление и невыплата пени по вине работодателя могут повлечь административный штраф.</p>
+        <div class="citation-line"><a class="source-link" href="https://adilet.zan.kz/rus/docs/K1400000235" referrerpolicy="no-referrer">Официальный текст в «Әділет»</a><small>Дата проверки: <time datetime="2026-11-15">15.11.2026</time></small></div>
+      </article>
+    </div>
+    <aside class="note content-section"><p>Перед использованием результата рекомендуется проверить актуальную редакцию нормы по официальной ссылке.</p></aside>
+    <section class="card content-section" aria-labelledby="sources-title">
+      <h2 id="sources-title">Источники</h2>
+      <ul class="sources"><li class="citation-line"><a class="source-link" href="https://adilet.zan.kz/rus/docs/K1500000414" referrerpolicy="no-referrer">Трудовой кодекс Республики Казахстан, статьи 22, 23, 113, 159, 160 и 192 · «Әділет»</a> · <a class="source-link" href="https://www.gov.kz/org/adilet-bko/documents/details/475615?lang=ru" referrerpolicy="no-referrer">Текст на gov.kz</a><small>Дата проверки: <time datetime="2026-11-15">15.11.2026</time></small></li>
+        <li class="citation-line"><a class="source-link" href="https://adilet.zan.kz/rus/docs/K1400000235" referrerpolicy="no-referrer">Кодекс Республики Казахстан об административных правонарушениях, статья 87 · «Әділет»</a> · <a class="source-link" href="https://www.gov.kz/org/zk/documents/details/24783?lang=ru" referrerpolicy="no-referrer">Текст на gov.kz</a><small>Дата проверки: <time datetime="2026-11-15">15.11.2026</time></small></li>
+        <li class="citation-line"><a class="source-link" href="https://nationalbank.kz/ru/news/grafik-prinyatiya-resheniy-po-bazovoy-stavke/rubrics/2365" referrerpolicy="no-referrer">Национальный Банк Республики Казахстан, таблицы базовой ставки для расчёта по п. 3 ст. 113 ТК РК · Нацбанк РК</a><small>Дата проверки: <time datetime="2026-11-15">15.11.2026</time></small></li>
+        <li class="citation-line"><a class="source-link" href="https://www.gov.kz/org/trud-zhambyl/press/news/details/1288828?lang=ru" referrerpolicy="no-referrer">Государственная инспекция труда, пример годового пересчёта по п. 3 ст. 113 ТК РК · gov.kz</a><small>Дата проверки: <time datetime="2026-11-15">15.11.2026</time></small></li></ul>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <span>Учебный юридический проект · Республика Казахстан</span>
+      <span>Материалы носят информационный характер.</span>
+      <span>Сайт создан с помощью ИИ.</span>
+    </div>
+  </footer>
+  <script>
+const rootElement = document.documentElement;
+const themeButton = document.getElementById('theme-toggle');
+const themeText = document.getElementById('theme-text');
+const menu = document.getElementById('navigation');
+const menuButton = document.getElementById('menu-toggle');
+const compact = window.matchMedia('(max-width: 790px)');
+const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+const pageLinks = Array.from(document.querySelectorAll('a[href]'))
+  .map(link => [link, link.getAttribute('href')])
+  .filter(([, href]) => /^(index|calculator|law|guide)\.html(?:#|$)/.test(href));
+
+const pageUrl = new URL(window.location.href);
+const requestedTheme = pageUrl.searchParams.get('theme');
+let explicitTheme = ['light', 'dark'].includes(requestedTheme) ? requestedTheme : null;
+
+function applyTheme() {
+  const theme = explicitTheme ?? (systemDark.matches ? 'dark' : 'light');
+  rootElement.dataset.theme = theme;
+  themeText.textContent = theme === 'dark' ? 'Тёмная' : 'Светлая';
+  themeButton.setAttribute('aria-label', theme === 'dark' ? 'Тема оформления. Переключить на светлую' : 'Тема оформления. Переключить на тёмную');
+  for (const [link, href] of pageLinks) {
+    const [path, fragment] = href.split('#');
+    const query = explicitTheme ? `?theme=${explicitTheme}` : '';
+    link.setAttribute('href', `${path}${query}${fragment ? '#' + fragment : ''}`);
+  }
+}
+
+themeButton.addEventListener('click', () => {
+  explicitTheme = rootElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  if (window.location.protocol !== 'file:') {
+    pageUrl.searchParams.set('theme', explicitTheme);
+    window.history.replaceState(null, '', pageUrl);
+  }
+  applyTheme();
+});
+systemDark.addEventListener('change', applyTheme);
+applyTheme();
+
+function setMenu(open) {
+  menu.hidden = compact.matches && !open;
+  menuButton.setAttribute('aria-expanded', String(compact.matches && open));
+}
+
+menuButton.addEventListener('click', () => setMenu(menu.hidden));
+compact.addEventListener('change', () => setMenu(false));
+menu.addEventListener('click', event => {
+  if (event.target.closest('a')) setMenu(false);
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
+    setMenu(false);
+    menuButton.focus();
+  }
+});
+document.addEventListener('click', event => {
+  if (!menu.contains(event.target) && !menuButton.contains(event.target)) setMenu(false);
+});
+rootElement.dataset.ui = 'ready';
+document.querySelector('.header-controls').hidden = false;
+setMenu(false);
+  </script>
+</body>
+</html>
+
+===== guide.html =====
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; form-action 'none'; base-uri 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>Инструкция · Пеня за задержку зарплаты в РК</title>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f5f6f8;
+  --surface: #fff;
+  --soft: #eef3f8;
+  --ink: #142338;
+  --muted: #46566a;
+  --line: #d5dee7;
+  --link: #164e79;
+  --primary: #173958;
+  --on-primary: #fff;
+  --focus: #316c98;
+  --danger: #a02032;
+  --danger-bg: #fff3f4;
+  --shadow: 0 18px 42px #172b4310;
+  font-family: Inter, 'Segoe UI', Arial, sans-serif;
+  font-size: 100%;
+  line-height: 1.55;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { min-width: 280px; }
+body { margin: 0; background: var(--bg); color: var(--ink); min-height: 100vh; display: flex; flex-direction: column; }
+a { color: var(--link); text-underline-offset: .2em; }
+button, input, textarea { font: inherit; color: inherit; }
+button, summary, input[type='checkbox'] { cursor: pointer; }
+button:disabled, input:disabled { cursor: default; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+h1, h2, h3 { line-height: 1.16; letter-spacing: -.026em; margin: 0; }
+h1 { font-size: clamp(2.15rem, 5vw, 3.7rem); }
+h2 { font-size: clamp(1.35rem, 3vw, 2rem); }
+h3 { font-size: 1.1rem; }
+p { margin: .65rem 0 0; }
+.wrap { width: min(1120px, calc(100% - 3rem)); margin-inline: auto; }
+.skip { position: absolute; top: .5rem; left: .5rem; z-index: 10; transform: translateY(-150%); background: var(--surface); padding: .65rem 1rem; }
+.skip:focus { transform: translateY(0); }
+.site-header { background: var(--surface); border-bottom: 1px solid var(--line); }
+.masthead { display: flex; justify-content: space-between; align-items: center; gap: 1.2rem; min-height: 76px; padding-block: .65rem; }
+.brand { display: inline-flex; align-items: center; gap: .65rem; color: var(--ink); text-decoration: none; font-weight: 750; white-space: nowrap; }
+.brand-mark { width: 37px; height: 37px; display: grid; place-items: center; color: var(--on-primary); background: var(--primary); border-radius: 9px; font-size: 1.18rem; }
+.site-nav { display: flex; flex-wrap: wrap; gap: .25rem; align-items: center; }
+.site-nav a { color: var(--muted); padding: .58rem .75rem; border-radius: 8px; text-decoration: none; font-size: .9rem; font-weight: 600; }
+.site-nav a:hover, .site-nav a[aria-current='page'] { color: var(--ink); background: var(--soft); }
+main { flex: 1; padding-block: clamp(2.25rem, 6vw, 5rem); }
+.site-footer { padding-block: 1.25rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .86rem; }
+.footer-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .45rem 1.2rem; }
+.muted, .lead, .hint { color: var(--muted); }
+.lead { font-size: clamp(1rem, 2vw, 1.13rem); max-width: 65ch; margin-top: 1rem; }
+.hint { font-size: .87rem; }
+.hint a { overflow-wrap: anywhere; }
+.page-head, .content-section { margin-bottom: 2rem; }
+.content-section:last-child { margin-bottom: 0; }
+.content-section > h2 { margin-bottom: 1rem; }
+.hero { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); align-items: center; gap: clamp(1.6rem, 6vw, 5.75rem); padding-block: .6rem 1rem; }
+.hero > *, .form-layout > *, .guide-layout > * { min-width: 0; }
+.actions { display: flex; flex-wrap: wrap; gap: .7rem; align-items: center; margin-top: 1.5rem; }
+.button { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; min-height: 44px; padding: .65rem 1rem; border: 1px solid var(--primary); border-radius: 8px; background: var(--primary); color: var(--on-primary); text-decoration: none; font-weight: 650; line-height: 1.25; text-align: center; }
+.button:hover { filter: brightness(1.12); }
+.button.secondary { border-color: var(--line); color: var(--ink); background: var(--surface); }
+.button.secondary:hover { border-color: var(--focus); background: var(--soft); filter: none; }
+.button:disabled { opacity: .58; }
+.card, .hero-aside, .note { background: var(--surface); border: 1px solid var(--line); border-radius: 13px; padding: clamp(1rem, 3vw, 1.55rem); }
+.card p, .note p { max-width: 68ch; }
+.hero-aside { background: var(--primary); color: var(--on-primary); padding: clamp(1.3rem, 4vw, 2rem); }
+.hero-aside ul { list-style: none; padding: 0; margin: .85rem 0 0; }
+.hero-aside li { display: flex; align-items: center; gap: .8rem; padding: .65rem 0; border-top: 1px solid #ffffff38; }
+.hero-aside p { color: inherit; }
+.note { background: var(--soft); border-inline-start: 4px solid var(--focus); }
+.note p:first-child, .card p:first-child { margin-top: 0; }
+.note h2 { font-size: 1.22rem; }
+.grid-three, .law-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, minmax(0,1fr)); }
+.law-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.info-stack { display: grid; gap: 1rem; }
+.steps-home { list-style: none; padding: 0; margin: 0; }
+.step-label { display: block; margin-bottom: .7rem; color: var(--link); font-weight: 750; }
+.interactive .button, .interactive .site-nav a, .interactive .steps-home .card { transition: background .2s, color .2s, border-color .2s, box-shadow .2s, transform .2s; }
+@media (hover: hover) { .interactive .steps-home .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); } }
+.form-layout, .guide-layout { display: grid; gap: 1.25rem; align-items: start; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.guide-layout { grid-template-columns: minmax(0, 1.7fr) minmax(0, .9fr); }
+.form-layout h2, .guide-layout h2 { margin-bottom: .35rem; }
+.field { margin-top: 1.05rem; }
+.field > label, .label { display: block; font-weight: 650; margin-bottom: .35rem; }
+input:not([type='checkbox']), textarea { width: 100%; min-width: 0; min-height: 46px; border: 1px solid var(--line); border-radius: 8px; padding: .62rem .75rem; background: var(--surface); }
+input:not([type='checkbox']):hover, textarea:hover { border-color: var(--focus); }
+input[aria-invalid='true'] { border-color: var(--danger); }
+input::placeholder { color: var(--muted); opacity: 1; }
+input[type='checkbox'] { accent-color: var(--primary); width: 1.13rem; height: 1.13rem; flex: none; margin: .15rem 0 0; }
+.check { display: flex; gap: .65rem; align-items: flex-start; }
+.check span { min-width: 0; }
+.status-field { margin-top: .8rem; }
+.field-error { margin: .35rem 0 0; color: var(--danger); font-size: .88rem; }
+.error-summary { color: var(--danger); background: var(--danger-bg); border-radius: 8px; padding: .7rem .85rem; margin-top: 1rem; }
+.results { padding: 0; overflow: hidden; }
+.result-body { padding: clamp(1rem, 3vw, 1.55rem); }
+.result-top { padding: clamp(1rem, 3vw, 1.55rem); background: var(--soft); border-bottom: 1px solid var(--line); }
+.result-amount { font-size: clamp(1.75rem, 4vw, 2.65rem); font-weight: 750; margin: .15rem 0 0; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.result-rows { margin: 0 0 1rem; }
+.result-rows div { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: .6rem; padding: .63rem 0; border-bottom: 1px solid var(--line); }
+.result-rows dd { margin: 0; text-align: right; font-weight: 700; overflow-wrap: anywhere; }
+.formula { padding: .65rem .8rem; background: var(--soft); border-radius: 6px; overflow-wrap: anywhere; }
+.numbered { padding-left: 1.4rem; margin: 1rem 0 0; }
+.numbered li { padding-inline-start: .2rem; margin-bottom: .7rem; }
+.numbered li p { margin-top: .15rem; }
+.source-link { display: inline-block; max-width: 100%; overflow-wrap: anywhere; font-weight: 650; }
+.sources { padding-left: 1.15rem; margin-block: .6rem 0; }
+.sources li + li { margin-top: .55rem; }
+.law-card { display: flex; flex-direction: column; gap: .75rem; align-items: flex-start; }
+.law-card p { margin-top: 0; }
+.law-card .citation-line { margin-top: auto; }
+.citation-line small { display: block; color: var(--muted); }
+.guide-step, .faq details { background: var(--surface); border: 1px solid var(--line); border-radius: 11px; }
+.guide-step + .guide-step, .faq details + details { margin-top: .65rem; }
+.guide-step summary, .faq summary { padding: .9rem 1rem; font-weight: 650; }
+.guide-step[open] summary, .faq details[open] summary { border-bottom: 1px solid var(--line); }
+.detail-body { padding: .85rem 1rem 1rem; }
+.detail-body > :first-child { margin-top: 0; }
+.detail-body .check { margin-top: .9rem; }
+.guide-docs { list-style: none; padding: 0; margin: .85rem 0 0; }
+.guide-docs li + li { margin-top: .75rem; }
+progress { display: block; width: 100%; height: .6rem; margin-top: .5rem; border: 0; border-radius: 999px; overflow: hidden; background: var(--soft); color: var(--primary); }
+progress::-webkit-progress-bar { background: var(--soft); }
+progress::-webkit-progress-value { background: var(--primary); }
+progress::-moz-progress-bar { background: var(--primary); }
+.progress-box { margin-bottom: 1rem; }
+.statement-text { margin-top: .7rem; min-height: 22rem; resize: vertical; line-height: 1.6; }
+.copy-status { min-height: 1.3em; }
+
+@media (max-width: 790px) {
+  .masthead { flex-wrap: wrap; gap: .5rem 1rem; }
+  .wrap { width: calc(100% - 2rem); }
+  .hero { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .form-layout, .guide-layout, .grid-three, .law-grid { grid-template-columns: 1fr; }
+  .site-nav a { font-size: .82rem; padding: .55rem .49rem; }
+  .brand { font-size: .94rem; }
+  .button { min-height: 46px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+:root {
+  --bg: #f6f5f1;
+  --surface: #fffefa;
+  --soft: #edf1f5;
+  --ink: #142439;
+  --muted: #47576b;
+  --line: #d4dce3;
+  --link: #194e75;
+  --primary: #183855;
+  --focus: #4b7193;
+  --navy: #142b42;
+  --navy-deep: #102236;
+  --accent: #e7ce9e;
+  --accent-line: #9f7949;
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #111821;
+  --surface: #1a2531;
+  --soft: #222f3d;
+  --ink: #edf2f7;
+  --muted: #bcc9d7;
+  --line: #425366;
+  --link: #b6d9f7;
+  --primary: #bfdbef;
+  --on-primary: #12253a;
+  --focus: #aad1f0;
+  --danger: #ffbbc2;
+  --danger-bg: #462932;
+  --shadow: 0 16px 40px #0004;
+  --accent-line: #cca26f;
+}
+.site-header { position: relative; z-index: 5; }
+.masthead { gap: .65rem 1.15rem; }
+.brand { margin-right: auto; }
+.brand-mark { background: var(--navy); color: #fcf5e6; border: 1px solid #a78a60; border-radius: 8px; }
+.header-controls { display: flex; align-items: center; gap: .45rem; order: 2; }
+.header-button { display: inline-flex; align-items: center; justify-content: center; gap: .45rem; min-height: 42px; border: 1px solid var(--line); border-radius: 8px; padding: .45rem .63rem; background: var(--surface); font-size: .82rem; font-weight: 650; white-space: nowrap; }
+.header-button:hover { background: var(--soft); }
+.menu-toggle { display: none; }
+.site-nav a[aria-current='page'] { box-shadow: inset 0 -2px 0 var(--accent-line); }
+h1 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 500; letter-spacing: -.046em; }
+.hero h1 { font-size: clamp(2.65rem, 5.25vw, 4.35rem); line-height: 1.02; max-width: 16ch; }
+.hero .lead { max-width: 53ch; }
+.hero { gap: clamp(1.6rem, 5vw, 4.5rem); padding-top: 0; margin-bottom: clamp(2.8rem, 6vw, 4.5rem); }
+.hero-aside { background: linear-gradient(140deg, var(--navy), var(--navy-deep)); color: #f5f7fb; border-color: #2a435f; border-radius: 16px; box-shadow: var(--shadow); padding: clamp(1.25rem, 4vw, 2.3rem); }
+.hero-aside h2 { color: #fffaf1; }
+.hero-aside ul { margin-top: 1.25rem; }
+.hero-aside li { padding: .9rem 0; line-height: 1.35; }
+.hero-aside li:last-child { padding-bottom: 0; }
+.hero-aside .icon { width: 2.15rem; height: 2.15rem; color: var(--accent); background: #ffffff0d; border: 1px solid #e7ce9e54; border-radius: 8px; }
+.steps-home .card { min-height: 146px; }
+.step-label { font-size: .84rem; margin-bottom: .8rem; }
+.page-head h1 { font-size: clamp(2.55rem, 5.5vw, 4.35rem); }
+.content-section { margin-bottom: clamp(1.55rem, 4vw, 2.55rem); }
+.card, .note { border-radius: 13px; }
+.note { border-inline-start-color: var(--accent-line); }
+.privacy h2 { display: flex; align-items: center; gap: .5rem; }
+.privacy .icon { color: var(--link); }
+.button, .header-button, .source-link { transition: background .2s, filter .2s, color .2s, border-color .2s; }
+.button:not(.secondary):hover { filter: brightness(.9); }
+.result-top { background: var(--navy); color: #fbf7f0; border-bottom: 3px solid var(--accent-line); }
+.result-top h2 { font-size: 1.15rem; }
+.result-amount { line-height: 1.2; margin-top: .45rem; }
+.result-empty { min-height: 11rem; background: var(--soft); border-style: dashed; }
+.results.arrive { animation: result-appear .27s cubic-bezier(.2,.7,.4,1) both; }
+@keyframes result-appear {
+  from { opacity: 0; transform: translateY(9px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.calc-progress { margin: 1rem 0 .55rem; font-size: .86rem; color: var(--muted); }
+.formula-heading, .breakdown { margin-top: 1rem; }
+.formula { font-variant-numeric: tabular-nums; }
+.source-link { border-radius: 4px; padding: .1em .25em; background: var(--soft); }
+.law-meta { color: var(--muted); }
+.law-meta strong { color: var(--link); }
+.tooltip { display: inline-block; position: relative; vertical-align: baseline; }
+.tooltip summary { display: inline-grid; place-items: center; width: 1.35rem; height: 1.35rem; list-style: none; border: 1px solid var(--line); border-radius: 100%; color: var(--link); background: var(--soft); font-size: .8rem; font-weight: 750; }
+.tooltip summary::-webkit-details-marker { display: none; }
+.tooltip-body { position: absolute; z-index: 4; inset: auto auto auto 0; width: min(16rem, 58vw); margin-top: .35rem; padding: .65rem; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); box-shadow: var(--shadow); color: var(--ink); font-size: .85rem; line-height: 1.4; font-weight: 400; letter-spacing: normal; }
+.faq details[open] .detail-body, .guide-step[open] .detail-body { animation: result-appear .19s ease-out; }
+.icon { display: inline-grid; place-items: center; width: 1.3rem; height: 1.3rem; flex: none; position: relative; }
+.icon::before, .icon::after { content: ''; position: absolute; box-sizing: border-box; }
+.icon-menu::before { width: .95rem; height: 2px; background: currentColor; box-shadow: 0 -.27rem currentColor, 0 .27rem currentColor; }
+.menu-toggle[aria-expanded='true'] .icon-menu::before { box-shadow: none; transform: rotate(45deg); }
+.menu-toggle[aria-expanded='true'] .icon-menu::after { width: .95rem; height: 2px; background: currentColor; transform: rotate(-45deg); }
+.icon-calendar::before { width: .98rem; height: .89rem; border: 1.5px solid; border-radius: 2px; }
+.icon-calendar::after { width: .86rem; height: 1.5px; top: calc(50% - .15rem); background: currentColor; }
+.icon-clock::before, .icon-theme::before { width: .98rem; height: .98rem; border: 1.5px solid; border-radius: 50%; }
+.icon-clock::after { width: .31rem; height: .29rem; top: calc(50% - .26rem); left: 50%; border-left: 1.5px solid; border-bottom: 1.5px solid; }
+.icon-theme::after { width: .42rem; height: .88rem; left: 50%; border-radius: 0 .55rem .55rem 0; background: currentColor; }
+.icon-lock::before { width: .8rem; height: .61rem; top: .53rem; border: 1.5px solid; border-radius: 2px; }
+.icon-lock::after { width: .46rem; height: .48rem; top: .17rem; border: 1.5px solid; border-bottom: 0; border-radius: 6px 6px 0 0; }
+.icon-money { font-weight: 750; }
+
+@media (max-width: 790px) {
+  .masthead { min-height: 66px; }
+  .header-controls { order: initial; }
+  .menu-toggle { display: inline-flex; }
+  .site-nav { flex: 1 0 100%; }
+  [data-ui='ready'] .site-nav { display: grid; grid-template-columns: 1fr; padding: .4rem .25rem .7rem; gap: .22rem; border-top: 1px solid var(--line); }
+  [data-ui='ready'] .site-nav a { font-size: .93rem; padding: .8rem; }
+  .hero h1 { max-width: 15ch; }
+  .hero-aside { width: 100%; }
+}
+@media (max-width: 440px) {
+  .masthead { gap: .45rem; }
+  .header-controls { gap: .3rem; }
+  .header-button { padding-inline: .52rem; }
+  .header-button:first-child .icon { display: none; }
+}
+@media (max-width: 380px) {
+  .brand { gap: .4rem; font-size: .88rem; }
+  .brand-mark { width: 30px; height: 30px; }
+  .masthead { gap: .5rem; }
+  .header-controls { gap: .27rem; }
+  .header-button { padding-inline: .38rem; }
+  .header-button .icon { display: none; }
+}
+  </style>
+</head>
+<body class="interactive">
+  <a class="skip" href="#main">К содержанию</a>
+  <header class="site-header">
+    <div class="wrap masthead">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">₸</span> Пеня за зарплату</a>
+      <div class="header-controls" hidden>
+        <button class="header-button" id="theme-toggle" type="button"><span class="icon icon-theme" aria-hidden="true"></span> <span id="theme-text">Светлая</span></button>
+        <button class="header-button menu-toggle" id="menu-toggle" type="button" aria-controls="navigation" aria-expanded="false"><span class="icon icon-menu" aria-hidden="true"></span> <span>Меню</span></button>
+      </div>
+      <nav class="site-nav" id="navigation" aria-label="Основное меню">
+        <a href="index.html">Главная</a>
+        <a href="calculator.html">Калькулятор пени</a>
+        <a href="law.html">Правовая база</a>
+        <a href="guide.html" aria-current="page">Инструкция</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap" id="main" tabindex="-1">
+    <header class="page-head"><h1>Инструкция для работника</h1><p class="lead">Проверьте срок выплаты, соберите документы и подготовьте обращение к работодателю.</p></header>
+    <section class="content-section" aria-labelledby="steps-title">
+      <h2 id="steps-title">Что делать, если задерживают зарплату</h2>
+      <div class="guide-layout">
+        <div>
+          <div class="card progress-box">
+            <p id="guide-progress-label" role="status" aria-live="polite">Выполнено 0 из 7 шагов</p>
+            <progress id="guide-progress" max="7" value="0" aria-labelledby="guide-progress-label"></progress>
+          </div>
+          <details class="guide-step">
+            <summary>1. Проверьте установленный срок выплаты</summary>
+            <div class="detail-body">
+              <p>Посмотрите дату выплаты в трудовом или коллективном договоре. Если день выплаты совпал с выходным или праздником, закон предусматривает выплату накануне. <a class="source-link" href="https://adilet.zan.kz/rus/docs/K1500000414" referrerpolicy="no-referrer">П. 1 ст. 113 ТК РК</a></p>
+              
+              <label class="check"><input type="checkbox" data-guide-step><span>Отметить шаг 1 как выполненный</span></label>
+            </div>
+          </details>
+          <details class="guide-step">
+            <summary>2. Определите количество дней задержки</summary>
+            <div class="detail-body">
+              <p>Первый день — следующий календарный день после срока. При уже выплаченной зарплате включите в период сам день выплаты. Если выплату ещё ждёте, для предварительной оценки считайте по сегодняшнюю дату. <a class="source-link" href="https://adilet.zan.kz/rus/docs/K1500000414" referrerpolicy="no-referrer">П. 3 ст. 113 ТК РК</a></p>
+              
+              <label class="check"><input type="checkbox" data-guide-step><span>Отметить шаг 2 как выполненный</span></label>
+            </div>
+          </details>
+          <details class="guide-step">
+            <summary>3. Рассчитайте ориентировочную пеню</summary>
+            <div class="detail-body">
+              <p>Введите сумму и даты в <a href="calculator.html">калькулятор пени</a>. Сохраните итог и даты, чтобы использовать их при обращении к работодателю.</p>
+              
+              <label class="check"><input type="checkbox" data-guide-step><span>Отметить шаг 3 как выполненный</span></label>
+            </div>
+          </details>
+          <details class="guide-step">
+            <summary>4. Соберите подтверждающие документы</summary>
+            <div class="detail-body">
+              <p>Подготовьте документы из списка рядом с инструкцией. Понадобятся сведения, по которым можно подтвердить размер начисленной суммы, срок выплаты и дату поступления денег.</p>
+              
+              <label class="check"><input type="checkbox" data-guide-step><span>Отметить шаг 4 как выполненный</span></label>
+            </div>
+          </details>
+          <details class="guide-step">
+            <summary>5. Направьте письменное заявление работодателю</summary>
+            <div class="detail-body">
+              <p>Укажите установленный срок, размер задержанной выплаты и период просрочки. Попросите выплатить непогашенную сумму и начислить пеню. <a class="source-link" href="https://adilet.zan.kz/rus/docs/K1500000414" referrerpolicy="no-referrer">П. 3 ст. 113 ТК РК</a> <a href="#statement">Перейти к конструктору заявления</a>.</p>
+              
+              <label class="check"><input type="checkbox" data-guide-step><span>Отметить шаг 5 как выполненный</span></label>
+            </div>
+          </details>
+          <details class="guide-step">
+            <summary>6. Сохраните доказательство направления</summary>
+            <div class="detail-body">
+              <p>Оставьте у себя экземпляр с отметкой о приёме или подтверждение доставки. Сохраните ответ работодателя, если он поступит.</p>
+              
+              <label class="check"><input type="checkbox" data-guide-step><span>Отметить шаг 6 как выполненный</span></label>
+            </div>
+          </details>
+          <details class="guide-step">
+            <summary>7. Если вопрос не решён, выберите способ защиты</summary>
+            <div class="detail-body">
+              <p>Можно подать обращение в территориальный департамент государственной инспекции труда, в том числе через <a class="source-link" href="https://eotinish.kz/ru" referrerpolicy="no-referrer">официальный портал eOtinish</a>. <a class="source-link" href="https://adilet.zan.kz/rus/docs/K1500000414" referrerpolicy="no-referrer">Ст. 192 ТК РК</a></p>
+              <p>Для индивидуального трудового спора обычно сначала обращаются в согласительную комиссию. Если спор остался нерешённым или решение комиссии не исполняется, можно обратиться в суд. Для отдельных категорий действуют исключения. Порядок и сроки указаны в <a class="source-link" href="https://adilet.zan.kz/rus/docs/K1500000414" referrerpolicy="no-referrer">ст. 159 и 160 ТК РК</a>.</p>
+              <label class="check"><input type="checkbox" data-guide-step><span>Отметить шаг 7 как выполненный</span></label>
+            </div>
+          </details>
+        </div>
+        <aside class="card" aria-labelledby="docs-title">
+          <h3 id="docs-title">Чек-лист документов</h3>
+          <p class="hint">Храните документы у себя. Загружать их на сайт не нужно.</p>
+          <ul class="guide-docs"><li><label class="check"><input type="checkbox"><span>Трудовой договор</span></label></li><li><label class="check"><input type="checkbox"><span>Расчётный лист</span></label></li><li><label class="check"><input type="checkbox"><span>Выписка о поступлениях</span></label></li><li><label class="check"><input type="checkbox"><span>Документы, подтверждающие срок выплаты</span></label></li><li><label class="check"><input type="checkbox"><span>Переписка с работодателем</span></label></li></ul>
+        </aside>
+      </div>
+    </section>
+    <section id="statement" class="content-section" aria-labelledby="statement-title">
+      <h2 id="statement-title">Создать заявление работодателю</h2>
+      <p class="lead content-section">Заполните сумму и даты. В готовом тексте останутся обозначения [ФИО работника], [Наименование работодателя], [Должность] и [Дата]. Замените их после копирования.</p>
+      <div class="form-layout">
+        <form class="card" id="statement-form" autocomplete="off" novalidate>
+          <h3>Данные о задержке</h3>
+          
+      <div class="field">
+        <label for="statement-amount">Сумма задержанной зарплаты, ₸</label>
+        <input id="statement-amount" data-field="amount" type="text" inputmode="decimal" maxlength="27" placeholder="Например, 300 000" required aria-describedby="statement-amount-error">
+        <p class="field-error" id="statement-amount-error" data-error-for="amount" hidden></p>
+      </div>
+      <div class="field">
+        <label for="statement-due">Установленная дата выплаты</label>
+        <input id="statement-due" data-field="due" type="date" required aria-describedby="statement-due-hint statement-due-error">
+        <p class="hint" id="statement-due-hint">Укажите срок с учётом выходных и праздников. <a class="source-link" href="https://adilet.zan.kz/rus/docs/K1500000414" referrerpolicy="no-referrer">П. 1 ст. 113 ТК РК</a></p>
+        <p class="field-error" id="statement-due-error" data-error-for="due" hidden></p>
+      </div>
+      <label class="check status-field"><input id="statement-unpaid" data-field="unpaid" type="checkbox"><span>Не выплачена до настоящего времени</span></label>
+      <div class="field" data-actual>
+        <label for="statement-paid">Фактическая дата выплаты</label>
+        <input id="statement-paid" data-field="paid" type="date" required aria-describedby="statement-paid-error">
+        <p class="field-error" id="statement-paid-error" data-error-for="paid" hidden></p>
+      </div>
+      <p class="error-summary" data-error-summary tabindex="-1" role="alert" hidden></p>
+          <div class="actions">
+            <button class="button" type="submit">Сформировать заявление</button>
+            <button class="button secondary" id="clear-statement" type="button">Очистить данные</button>
+          </div>
+          <p class="hint">Источник ставки и даты её проверки приведены в <a href="calculator.html">калькуляторе</a>.</p>
+        </form>
+        <div class="card">
+          <h3 id="statement-preview-title" tabindex="-1">Текст заявления</h3>
+          <p id="statement-placeholder" class="muted">Заполните данные о задержке и сформируйте заявление.</p>
+          <div id="statement-preview" hidden>
+            <label for="statement-text" class="hint">Шаблон для копирования</label>
+            <textarea id="statement-text" class="statement-text" readonly spellcheck="false"></textarea>
+            <div class="actions"><button class="button secondary" id="copy-statement" type="button">Скопировать текст</button></div>
+          </div>
+          <p id="copy-status" class="hint copy-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+    <aside class="note privacy" id="privacy" aria-labelledby="privacy-title">
+      <h2 id="privacy-title"><span class="icon icon-lock" aria-hidden="true"></span>Ваши данные остаются у вас</h2>
+      <p>Регистрация не нужна. Для расчёта достаточно суммы и дат. Сайт не запрашивает ФИО, ИИН, настоящий адрес, телефон, название работодателя или банковские данные.</p>
+      <p>Расчёт и подготовка заявления выполняются в браузере. Введённые данные не отправляются на сервер и не записываются сайтом в локальное хранилище. Подставить свои данные вместо шаблонных обозначений можно в копии заявления.</p>
+    </aside>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <span>Учебный юридический проект · Республика Казахстан</span>
+      <span>Материалы носят информационный характер.</span>
+      <span>Сайт создан с помощью ИИ.</span>
+    </div>
+  </footer>
+  <script>
+const rootElement = document.documentElement;
+const themeButton = document.getElementById('theme-toggle');
+const themeText = document.getElementById('theme-text');
+const menu = document.getElementById('navigation');
+const menuButton = document.getElementById('menu-toggle');
+const compact = window.matchMedia('(max-width: 790px)');
+const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+const pageLinks = Array.from(document.querySelectorAll('a[href]'))
+  .map(link => [link, link.getAttribute('href')])
+  .filter(([, href]) => /^(index|calculator|law|guide)\.html(?:#|$)/.test(href));
+
+const pageUrl = new URL(window.location.href);
+const requestedTheme = pageUrl.searchParams.get('theme');
+let explicitTheme = ['light', 'dark'].includes(requestedTheme) ? requestedTheme : null;
+
+function applyTheme() {
+  const theme = explicitTheme ?? (systemDark.matches ? 'dark' : 'light');
+  rootElement.dataset.theme = theme;
+  themeText.textContent = theme === 'dark' ? 'Тёмная' : 'Светлая';
+  themeButton.setAttribute('aria-label', theme === 'dark' ? 'Тема оформления. Переключить на светлую' : 'Тема оформления. Переключить на тёмную');
+  for (const [link, href] of pageLinks) {
+    const [path, fragment] = href.split('#');
+    const query = explicitTheme ? `?theme=${explicitTheme}` : '';
+    link.setAttribute('href', `${path}${query}${fragment ? '#' + fragment : ''}`);
+  }
+}
+
+themeButton.addEventListener('click', () => {
+  explicitTheme = rootElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  if (window.location.protocol !== 'file:') {
+    pageUrl.searchParams.set('theme', explicitTheme);
+    window.history.replaceState(null, '', pageUrl);
+  }
+  applyTheme();
+});
+systemDark.addEventListener('change', applyTheme);
+applyTheme();
+
+function setMenu(open) {
+  menu.hidden = compact.matches && !open;
+  menuButton.setAttribute('aria-expanded', String(compact.matches && open));
+}
+
+menuButton.addEventListener('click', () => setMenu(menu.hidden));
+compact.addEventListener('change', () => setMenu(false));
+menu.addEventListener('click', event => {
+  if (event.target.closest('a')) setMenu(false);
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
+    setMenu(false);
+    menuButton.focus();
+  }
+});
+document.addEventListener('click', event => {
+  if (!menu.contains(event.target) && !menuButton.contains(event.target)) setMenu(false);
+});
+rootElement.dataset.ui = 'ready';
+document.querySelector('.header-controls').hidden = false;
+setMenu(false);
+
+
+// Даты начала действия ставок из таблиц Национального Банка Казахстана.
+// При обновлении добавьте изменения по порядку и перенесите verifiedThrough
+// на последнюю дату, на которую проверена таблица. Значения: сотые доли процента.
+const rateTable = {
+  verifiedFrom: '2021-01-01',
+  verifiedThrough: '2026-11-15',
+  changes: [
+    ['2021-01-01', 900], // Переходящая ставка с 2020 года.
+    ['2021-07-27', 925],
+    ['2021-09-14', 950],
+    ['2021-10-26', 975],
+    ['2022-01-25', 1025],
+    ['2022-02-24', 1350],
+    ['2022-04-26', 1400],
+    ['2022-07-26', 1450],
+    ['2022-10-27', 1600],
+    ['2022-12-06', 1675],
+    ['2023-08-28', 1650],
+    ['2023-10-09', 1600],
+    ['2023-11-27', 1575],
+    ['2024-01-22', 1525],
+    ['2024-02-26', 1475],
+    ['2024-06-03', 1450],
+    ['2024-07-15', 1425],
+    ['2024-12-02', 1525],
+    ['2025-03-11', 1650],
+    ['2025-10-13', 1800],
+    ['2026-06-08', 1700],
+    ['2026-07-27', 1675],
+    ['2026-09-07', 1625],
+    ['2026-10-27', 1575]
+  ]
+};
+
+
+const calendar = new Intl.DateTimeFormat('en-CA', {
+  timeZone: 'Asia/Qyzylorda', year: 'numeric', month: '2-digit', day: '2-digit'
+});
+const integer = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 0 });
+const percent = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 4 });
+const millisecondsInDay = 86_400_000;
+const rateCoefficientHundredths = 125n;
+const daysInAnnualCalculation = 365n;
+const penaltyDivisor = 100n * 10_000n * daysInAnnualCalculation;
+
+function todayInKazakhstan() {
+  const parts = Object.fromEntries(calendar.formatToParts(new Date()).map(({type, value}) => [type, value]));
+  return `${parts.year}-${parts.month}-${parts.day}`;
+}
+
+function calendarDay(iso) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(iso) || iso.startsWith('0000-')) return NaN;
+  const instant = new Date(`${iso}T00:00:00.000Z`);
+  if (!Number.isFinite(instant.getTime()) || instant.toISOString().slice(0, 10) !== iso) return NaN;
+  return instant.getTime() / millisecondsInDay;
+}
+
+function dateLabel(iso) {
+  return iso.split('-').reverse().join('.');
+}
+
+function nextCalendarDate(day) {
+  return new Date((day + 1) * millisecondsInDay).toISOString().slice(0, 10);
+}
+
+function money(tiyn) {
+  return `${integer.format(tiyn / 100n)},${String(tiyn % 100n).padStart(2, '0')} ₸`;
+}
+
+function readAmount(text) {
+  const trimmed = text.trim();
+  if (!trimmed) return { error: 'Введите сумму зарплаты в тенге.' };
+  if (/^[-−]/.test(trimmed)) return { error: 'Сумма зарплаты не может быть отрицательной.' };
+  if (!/^(?:\d+|\d{1,3}(?:[ \u00a0\u202f]\d{3})+)(?:[,.]\d{1,2})?$/.test(trimmed)) {
+    return { error: 'Введите сумму цифрами. После запятой можно указать до двух знаков.' };
+  }
+  const [whole, fraction = ''] = trimmed.replace(/[ \u00a0\u202f]/g, '').split(/[,.]/);
+  const tiyn = BigInt(whole) * 100n + BigInt(fraction.padEnd(2, '0'));
+  if (tiyn === 0n) return { error: 'Введите сумму больше нуля.' };
+  return { tiyn };
+}
+
+function calculatePenalty({ amount, due, paid, unpaid }, today = todayInKazakhstan()) {
+  const parsedAmount = readAmount(amount);
+  const end = unpaid ? today : paid;
+  const dueDay = calendarDay(due);
+  const endDay = calendarDay(end);
+  const errors = {};
+
+  if (parsedAmount.error) errors.amount = parsedAmount.error;
+  if (!Number.isFinite(dueDay)) errors.due = 'Укажите установленную дату выплаты.';
+  else if (due > today) errors.due = 'Установленная дата выплаты ещё не наступила.';
+  if (!unpaid) {
+    if (!Number.isFinite(endDay)) errors.paid = 'Укажите фактическую дату выплаты или отметьте, что зарплата ещё не выплачена.';
+    else if (paid > today) errors.paid = 'Фактическая дата выплаты не может быть в будущем.';
+    else if (Number.isFinite(dueDay) && endDay < dueDay) errors.paid = 'Фактическая дата выплаты не может быть раньше установленного срока.';
+  }
+  if (Object.keys(errors).length) return { errors };
+
+  const days = endDay - dueDay;
+  const { tiyn } = parsedAmount;
+  if (!days) {
+    return { due, end, unpaid, days, amount: tiyn, penalty: 0n, total: tiyn, start: null, rate: null, annualRate: null };
+  }
+
+  if (end < rateTable.verifiedFrom || end > rateTable.verifiedThrough) {
+    return { message: `На ${dateLabel(end)} в этой версии нет подтверждённой ставки. Сверьте её по данным Национального Банка. Таблица сайта охватывает даты с ${dateLabel(rateTable.verifiedFrom)} по ${dateLabel(rateTable.verifiedThrough)}.` };
+  }
+
+  const [, rateBasisPoints] = rateTable.changes.findLast(([effective]) => effective <= end);
+  const numerator = tiyn * rateCoefficientHundredths * BigInt(rateBasisPoints) * BigInt(days);
+  const penalty = (numerator + penaltyDivisor / 2n) / penaltyDivisor;
+  return {
+    due, end, unpaid, days, amount: tiyn, penalty, total: tiyn + penalty,
+    start: nextCalendarDate(dueDay),
+    rate: percent.format(rateBasisPoints / 100),
+    annualRate: percent.format(rateBasisPoints * Number(rateCoefficientHundredths) / 10_000)
+  };
+}
+
+function readCase(form) {
+  return {
+    amount: form.querySelector('[data-field="amount"]').value,
+    due: form.querySelector('[data-field="due"]').value,
+    paid: form.querySelector('[data-field="paid"]').value,
+    unpaid: form.querySelector('[data-field="unpaid"]').checked
+  };
+}
+
+function connectCaseForm(form, onSubmit, onChange) {
+  const due = form.querySelector('[data-field="due"]');
+  const paid = form.querySelector('[data-field="paid"]');
+  const unpaid = form.querySelector('[data-field="unpaid"]');
+  const summary = form.querySelector('[data-error-summary]');
+  const errors = form.querySelectorAll('[data-error-for]');
+  const paidWrap = paid.closest('[data-actual]');
+
+  function clearErrors() {
+    summary.hidden = true;
+    summary.textContent = '';
+    for (const line of errors) {
+      line.hidden = true;
+      line.textContent = '';
+    }
+    for (const field of form.querySelectorAll('[aria-invalid]')) field.removeAttribute('aria-invalid');
+  }
+
+  function syncDates() {
+    const today = todayInKazakhstan();
+    due.max = today;
+    paid.max = today;
+    paid.disabled = unpaid.checked;
+    paid.required = !unpaid.checked;
+    paidWrap.hidden = unpaid.checked;
+  }
+
+  function changed() {
+    clearErrors();
+    syncDates();
+    onChange();
+  }
+
+  form.addEventListener('input', changed);
+  form.addEventListener('reset', () => queueMicrotask(changed));
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    clearErrors();
+    syncDates();
+    const result = calculatePenalty(readCase(form));
+    if (!result.errors && !result.message) {
+      onSubmit(result);
+      return;
+    }
+    onChange();
+    if (result.errors && errors.length) {
+      for (const [key, message] of Object.entries(result.errors)) {
+        const field = form.querySelector(`[data-field="${key}"]`);
+        const line = form.querySelector(`[data-error-for="${key}"]`);
+        field.setAttribute('aria-invalid', 'true');
+        line.textContent = message;
+        line.hidden = false;
       }
-
-      noDelayMsg.classList.add('hidden');
-
-      // Formula RK: (Сумма * (Базовая_Ставка * 1.25) / 365) * Дни / 100
-      const annualRateMultiplier = rateInput * 1.25;
-      const dailyRateMultiplier = annualRateMultiplier / 365;
-      const dailyPenalty = (debtInput * dailyRateMultiplier) / 100;
-      const calculatedPenalty = dailyPenalty * diffDays;
-      const totalAmount = debtInput + calculatedPenalty;
-
-      // Update State
-      globalCalcState = {
-        debt: debtInput,
-        days: diffDays,
-        penalty: calculatedPenalty,
-        total: totalAmount,
-        rate: rateInput,
-        dateDue: dateDueInput,
-        dateActual: dateActualInput
-      };
-
-      // UI Update Main
-      resDays.textContent = `${diffDays} ${getDaysPlural(diffDays)}`;
-      resPenalty.textContent = `${Math.round(calculatedPenalty).toLocaleString('ru-RU')} ₸`;
-      resTotal.textContent = `${Math.round(totalAmount).toLocaleString('ru-RU')} ₸`;
-
-      // UI Update Breakdown Steps
-      stepRateAnnual.textContent = `${annualRateMultiplier.toFixed(4)}%`;
-      stepRateDaily.textContent = `${dailyRateMultiplier.toFixed(4)}%`;
-      stepPenaltyDaily.textContent = `${dailyPenalty.toFixed(2)} ₸`;
-      stepPenaltyTotal.textContent = `${Math.round(calculatedPenalty).toLocaleString('ru-RU')} ₸`;
-
-      btnClaim.disabled = false;
+      form.querySelector('[aria-invalid="true"]').focus();
+    } else {
+      summary.textContent = result.message ?? Object.values(result.errors)[0];
+      summary.hidden = false;
+      summary.focus();
     }
+  });
+  syncDates();
+}
 
-    function getDaysPlural(number) {
-      const cases = [2, 0, 1, 1, 1, 2];
-      const titles = ['день', 'дня', 'дней'];
-      return titles[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
+
+const checklist = Array.from(document.querySelectorAll('[data-guide-step]'));
+const guideProgress = document.querySelector('#guide-progress');
+const guideProgressLabel = document.querySelector('#guide-progress-label');
+
+function updateGuideProgress() {
+  const complete = checklist.filter(box => box.checked).length;
+  guideProgress.value = complete;
+  guideProgressLabel.textContent = `Выполнено ${complete} из ${checklist.length} шагов`;
+}
+
+for (const box of checklist) box.addEventListener('change', updateGuideProgress);
+window.addEventListener('pageshow', updateGuideProgress);
+updateGuideProgress();
+
+
+const statementForm = document.querySelector('#statement-form');
+const statementPreview = document.querySelector('#statement-preview');
+const statementPlaceholder = document.querySelector('#statement-placeholder');
+const statementText = document.querySelector('#statement-text');
+const feedback = document.querySelector('#copy-status');
+
+function clearStatementPreview() {
+  statementText.value = '';
+  statementPreview.hidden = true;
+  statementPlaceholder.hidden = false;
+  feedback.textContent = '';
+}
+
+function makeStatement(result) {
+  clearStatementPreview();
+  if (!result.days) {
+    feedback.textContent = 'По указанным датам просрочки нет. Заявление о выплате пени не сформировано.';
+    return;
+  }
+
+  const { amount, penalty, due, end, start, days, unpaid } = result;
+  const status = unpaid
+    ? `По состоянию на ${dateLabel(end)} заработная плата в сумме ${money(amount)} не выплачена.`
+    : `Заработная плата в сумме ${money(amount)} была выплачена с задержкой ${dateLabel(end)}.`;
+  const estimate = unpaid
+    ? `Предварительная сумма пени на ${dateLabel(end)} составляет ${money(penalty)}.`
+    : `Расчётная сумма пени составляет ${money(penalty)}.`;
+  const request = unpaid
+    ? `Прошу выплатить задолженность по заработной плате в сумме ${money(amount)}, а также начислить и выплатить пеню за весь период задержки по день фактической выплаты включительно с применением ставки на этот день.`
+    : 'Прошу начислить и выплатить пеню за указанный период задержки заработной платы.';
+
+  statementText.value = [
+    'Кому: [Наименование работодателя]\nОт: [ФИО работника]\nДолжность: [Должность]',
+    unpaid ? 'Заявление о выплате задолженности по заработной плате и пени' : 'Заявление о выплате пени за задержку заработной платы',
+    `Установленный срок выплаты заработной платы — ${dateLabel(due)}. ${status}`,
+    `Период задержки: с ${dateLabel(start)} по ${dateLabel(end)} включительно. Дней задержки: ${days}. ${estimate}`,
+    'Основание: пункт 3 статьи 113 Трудового кодекса Республики Казахстан. Официальный текст: https://adilet.zan.kz/rus/docs/K1500000414',
+    request,
+    'Дата: [Дата]\nПодпись: ____________________'
+  ].join('\n\n');
+  statementPreview.hidden = false;
+  statementPlaceholder.hidden = true;
+  document.querySelector('#statement-preview-title').focus();
+}
+
+async function copyStatement() {
+  const text = statementText.value;
+  if (!text) return;
+  let copied = false;
+  if (navigator.clipboard?.writeText) {
+    try {
+      await navigator.clipboard.writeText(text);
+      copied = true;
+    } catch {
+      // Some browsers restrict Clipboard API access on pages opened from disk.
     }
-
-    // Modal Claim Generator
-    function generateClaimModal() {
-      const container = document.getElementById('claim-text-container');
-      const modal = document.getElementById('claim-modal');
-
-      const claimTemplate = 
-`Руководителю [Наименование Организации/ТОО/ИП]
-От: [Ф.И.О. Работника]
-ИИН: [ИИН Работника]
-Телефон: [Контактный телефон]
-
-ПРЕТЕНЗИЯ
-о выплате задолженности по заработной плате и начислении пени
-
-Я, [Ф.И.О. Работника], работаю в [Наименование Организации] на должности [Ваша Должность].
-
-В нарушение п. 1 ст. 113 Трудового кодекса Республики Казахстан, мне не была своевременно выплачена заработная плата за период [Указать период].
-
-Согласно трудовому договору, срок выплаты заработной платы установлен до ${globalCalcState.dateDue}.
-Фактическая дата расчета (расчета пени): ${globalCalcState.dateActual}.
-Период просрочки составляет: ${globalCalcState.days} календарных дней.
-Сумма основного долга: ${globalCalcState.debt.toLocaleString('ru-RU')} тенге.
-
-На основании п. 4 ст. 113 Трудового кодекса РК, при невыплате заработной платы работодатель обязан выплатить задолженность и пеню. Размер пени рассчитывается исходя из 1,25-кратной базовой ставки Национального Банка РК (в данный момент ${globalCalcState.rate}%) за каждый день просрочки.
-
-Расчет пени:
-Пеня = (${globalCalcState.debt} ₸ × (${globalCalcState.rate}% × 1.25) / 365) × ${globalCalcState.days} дн. = ${Math.round(globalCalcState.penalty).toLocaleString('ru-RU')} тенге.
-
-Итого общая сумма к выплате составляет: ${Math.round(globalCalcState.total).toLocaleString('ru-RU')} тенге.
-
-На основании изложенного, ПРОШУ:
-1. Выплатить задолженность по заработной плате в размере ${globalCalcState.debt.toLocaleString('ru-RU')} тенге.
-2. Выплатить пеню за задержку выплаты в размере ${Math.round(globalCalcState.penalty).toLocaleString('ru-RU')} тенге.
-
-В случае игнорирования данной претензии в течение 10 дней, я буду вынужден(а) обратиться в Управление государственной инспекции труда (с требованием привлечения к ответственности по ст. 87 КоАП РК), в Согласительную комиссию и суд.
-
-Дата: [Текущая дата]
-Подпись: ____________ / [Ф.И.О.]`;
-
-      container.textContent = claimTemplate;
-      modal.classList.remove('hidden');
-
-      if (window.lucide) {
-        lucide.createIcons();
-      }
+  }
+  if (statementText.value !== text) return;
+  if (!copied) {
+    statementText.focus();
+    statementText.select();
+    try {
+      copied = document.execCommand('copy');
+    } catch {
+      // Keep the text selected for the system copy command.
     }
+  }
+  feedback.textContent = copied
+    ? 'Текст скопирован.'
+    : 'Текст выделен. Для копирования нажмите Ctrl+C, ⌘+C или используйте меню копирования.';
+}
 
-    function closeClaimModal() {
-      document.getElementById('claim-modal').classList.add('hidden');
-    }
-
-    function copyClaimText() {
-      const text = document.getElementById('claim-text-container').textContent;
-      navigator.clipboard.writeText(text).then(() => {
-        const btn = document.getElementById('btn-copy-claim');
-        const originalHTML = btn.innerHTML;
-        btn.innerHTML = `<i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Скопировано!`;
-        btn.classList.add('bg-emerald-900');
-        if (window.lucide) lucide.createIcons();
-
-        setTimeout(() => {
-          btn.innerHTML = originalHTML;
-          btn.classList.remove('bg-emerald-900');
-          if (window.lucide) lucide.createIcons();
-        }, 2000);
-      });
-    }
+connectCaseForm(statementForm, makeStatement, clearStatementPreview);
+document.querySelector('#copy-statement').addEventListener('click', copyStatement);
+document.querySelector('#clear-statement').addEventListener('click', () => {
+  statementForm.reset();
+  statementForm.querySelector('[data-field="amount"]').focus();
+});
   </script>
 </body>
 </html>
